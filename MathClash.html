@@ -314,10 +314,13 @@ function genQ(ch){
     case '-':a=ri(ch.min,ch.max);b=ri(ch.min,a);return{text:`${a} - ${b} = ?`,ans:a-b};
     case 'x':a=ri(1,Math.min(ch.max,12));b=ri(1,Math.min(ch.max,12));return{text:`${a} × ${b} = ?`,ans:a*b};
     case 'd':b=ri(1,Math.min(ch.max,12));a=b*ri(1,Math.min(ch.max,12));return{text:`${a} ÷ ${b} = ?`,ans:a/b};
-    case '+f':d=ri(2,ch.max);a=ri(1,d-1);b=ri(1,d-a);return{text:`${a}/${d} + ${b}/${d} = ?`,ans:a+b};
-    case '-f':d=ri(2,ch.max);a=ri(2,d-1);b=ri(1,a-1);return{text:`${a}/${d} - ${b}/${d} = ?`,ans:a-b};
-    case 'xf':a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);n=a*c;dn=b*d;g=gcd(n,dn);return{text:`${a}/${b} × ${c}/${d} = ?`,ans:n/g};
-    case 'df':a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);n=a*d;dn=b*c;g=gcd(n,dn);return{text:`${a}/${b} ÷ ${c}/${d} = ?`,ans:n/g};
+    // เศษส่วนเศษตัวเดียวกัน: หาตัวเศษ
+    case '+f':d=ri(3,Math.max(ch.max,5));a=ri(1,d-2);b=ri(1,d-1-a);return{text:`${a}/${d} + ${b}/${d} = ?/${d}`,ans:a+b};
+    case '-f':d=ri(3,Math.max(ch.max,5));a=ri(2,d-1);b=ri(1,a-1);return{text:`${a}/${d} - ${b}/${d} = ?/${d}`,ans:a-b};
+    // คูณเศษส่วน: (a/b)×b = a → คำตอบเป็นจำนวนเต็ม
+    case 'xf':{b=ri(2,Math.min(ch.max,9));a=ri(1,b-1);return{text:`${a}/${b} × ${b} = ?`,ans:a};}
+    // หารเศษส่วน: a ÷ (1/b) = a×b
+    case 'df':{a=ri(1,5);b=ri(2,Math.min(ch.max,9));return{text:`${a} ÷ 1/${b} = ?`,ans:a*b};}
     case '+d':a=ri(ch.min,ch.max);b=ri(ch.min,ch.max);return{text:`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,ans:Math.round(a+b)/10};
     case '-d':a=ri(ch.min,ch.max);b=ri(ch.min,a);return{text:`${(a/10).toFixed(1)} - ${(b/10).toFixed(1)} = ?`,ans:Math.round(a-b)/10};
     case 'xd':a=ri(1,9);b=ri(ch.min,ch.max);return{text:`${a} × ${(b/10).toFixed(1)} = ?`,ans:Math.round(a*b)/10};
@@ -439,7 +442,7 @@ function spawnEnemy(){
   const isBoss=GS.wave===GS.ch.waves-1&&GS.spawnCount===GS.spawnMax-1;
   const isHeavy=GS.spawnCount%4===3;
   // ── Speeds ──
-  const spd=2.2+GS.wave*0.25;
+  const spd=1.8+GS.wave*0.2;
   const hp=isBoss?12+GS.wave*4:isHeavy?4+GS.wave:2+Math.floor(GS.wave*.7);
   const keys=isBoss?BS_KEYS:isHeavy?TK_KEYS:NM_KEYS;
   const imgKey=keys[Math.floor(Math.random()*keys.length)];

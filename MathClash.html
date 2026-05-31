@@ -10,7 +10,6 @@
 body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidden;height:100vh;width:100vw;}
 .screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;}
 .screen.active{display:flex;}
-/* TITLE */
 #sc-title{background:radial-gradient(ellipse at 50% 30%,#1a3a1a 0%,#0a0a14 100%);}
 .title-logo{width:min(92vw,520px);height:auto;filter:drop-shadow(0 8px 32px rgba(240,165,0,.5));animation:logoBob 3s ease-in-out infinite;}
 @keyframes logoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -19,7 +18,6 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 .title-play:active{transform:scale(.96);}
 .title-grades{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:8px;}
 .tg{padding:4px 12px;background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);border-radius:16px;font-size:.78em;color:#f0c030;font-family:inherit;}
-/* GRADE */
 #sc-grade{background:radial-gradient(ellipse at 50% 0%,#1a3a1a,#0a0a14);}
 .grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(92vw,380px);}
 .grade-btn{padding:20px 12px 16px;border-radius:18px;cursor:pointer;font-family:inherit;color:#fff;transition:.2s;text-align:center;border:2px solid rgba(240,192,48,.25);background:linear-gradient(160deg,rgba(240,192,48,.08),rgba(0,0,0,.3));}
@@ -28,10 +26,8 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 .g-label{font-size:1.2em;font-weight:900;color:#f0c030;}
 .g-topic{font-size:.75em;color:#bbb;margin-top:3px;}
 .g-prog{font-size:.72em;color:#f0c030;margin-top:5px;min-height:1em;}
-/* SHARED */
 .back-btn{background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);color:#f0c030;padding:8px 18px;border-radius:10px;cursor:pointer;font-size:.9em;font-family:inherit;}
 .gold-title{color:#f0c030;font-size:1.2em;font-weight:900;}
-/* MAP */
 #sc-map{background:radial-gradient(ellipse at 50% 0%,#1a3a1a,#0a0a14);justify-content:flex-start;}
 .map-header{width:100%;padding:12px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
 .map-scroll{flex:1;width:100%;overflow-y:auto;padding:12px 14px 24px;}
@@ -43,7 +39,6 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 .ch-ico{font-size:2.2em;min-width:46px;text-align:center;}
 .ch-body{flex:1;}.ch-name{font-size:.93em;font-weight:700;}.ch-meta{font-size:.73em;color:#aaa;margin-top:2px;}.ch-stars{font-size:.85em;color:#f0c030;margin-top:3px;}.ch-badge{font-size:1.3em;}
 .world-div{font-size:.7em;color:#f0c030;text-align:center;padding:6px 0 8px;letter-spacing:1px;opacity:.7;}
-/* PRE */
 #sc-pre{background:radial-gradient(ellipse at 50% 0%,#1a2a4a,#0a0a14);justify-content:flex-start;}
 .pre-header{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
 .pre-body{flex:1;overflow-y:auto;padding:12px 16px;width:100%;}
@@ -54,9 +49,8 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 .tip-text{font-size:.82em;color:#ccc;line-height:1.7;}
 .start-btn{margin:0 16px 16px;padding:15px;width:calc(100% - 32px);background:linear-gradient(135deg,#c8a215,#f0c030,#c8a215);color:#3d2000;border:none;border-radius:14px;font-size:1.15em;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 4px 20px rgba(240,192,48,.4);}
 .start-btn:active{transform:scale(.97);}
-/* GAME */
 #sc-game{background:#000;justify-content:flex-start;padding:0;}
-#gCanvas{display:block;width:100%;flex-shrink:0;}
+#gCanvas{display:block;width:100%;flex-shrink:0;cursor:crosshair;}
 .game-ui{width:100%;background:rgba(5,3,15,.94);backdrop-filter:blur(6px);padding:7px 10px 10px;flex-shrink:0;border-top:1px solid rgba(240,192,48,.2);}
 .hud{display:flex;justify-content:space-between;align-items:center;font-size:.82em;margin-bottom:6px;}
 .hud-lives{color:#e74c3c;}.hud-wave{color:#f0c030;font-weight:700;}.hud-coins{color:#f0c030;font-weight:700;}
@@ -71,12 +65,10 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 .ans-btn:active{transform:scale(.93);}
 .ans-btn.correct{background:rgba(39,174,96,.55);border-color:#27ae60;}
 .ans-btn.wrong{background:rgba(231,76,60,.5);border-color:#e74c3c;}
-/* RESULT */
 #sc-result{background:radial-gradient(ellipse at 50% 30%,#1a3a1a,#0a0a14);}
 .res-icon{font-size:4.5em;margin-bottom:10px;}.res-title{font-size:2em;font-weight:900;color:#f0c030;margin-bottom:6px;}.res-stars{font-size:2em;color:#f0c030;margin-bottom:8px;letter-spacing:4px;}.res-sub{font-size:.9em;color:#aaa;margin-bottom:24px;}
 .res-btn{padding:13px 26px;border-radius:12px;border:none;font-size:1em;font-weight:700;cursor:pointer;margin:5px;font-family:inherit;}
 .btn-next{background:linear-gradient(135deg,#c8a215,#f0c030);color:#3d2000;}.btn-retry{background:rgba(240,192,48,.1);color:#f0c030;border:1.5px solid rgba(240,192,48,.3);}.btn-map{background:rgba(255,255,255,.05);color:#aaa;border:1px solid rgba(255,255,255,.12);}
-/* LOADING */
 #sc-loading{background:#0a0a14;}
 .loading-logo{width:min(80vw,300px);height:auto;animation:logoBob 1.5s ease-in-out infinite;margin-bottom:16px;}
 .loading-bar-wrap{width:min(80vw,300px);height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;}
@@ -144,7 +136,7 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
   </div>
   <div class="pre-body">
     <div class="info-card"><h3>⚗️ เนื้อหา</h3><div class="ops-wrap" id="pre-ops"></div></div>
-    <div class="info-card"><h3>📖 วิธีเล่น</h3><div class="tip-text">🏰 เริ่มต้น 1 ป้อม — ซื้อป้อมที่ 2 ด้วย 30🪙<br>👾 ตอบถูก = ยิงสายฟ้าใส่มอนสเตอร์!<br>❤️ มอนผ่านด่าน = เสียหัวใจ (มี 5 ดวง)<br>🔥 ตอบถูกติดต่อ 3+ = Streak Bonus!</div></div>
+    <div class="info-card"><h3>📖 วิธีเล่น</h3><div class="tip-text">🏰 แตะบนสนามเพื่อวางป้อม — ซื้อป้อมที่ 2 ด้วย 30🪙<br>👾 ตอบถูก = ยิงสายฟ้าใส่มอนสเตอร์!<br>⚡ กระสุนวิ่งโค้งและกระโดดไปยิงตัวถัดไปด้วย!<br>❤️ มอนผ่านด่าน = เสียหัวใจ (มี 5 ดวง)<br>🔥 ตอบถูกติดต่อ 3+ = Streak Bonus!</div></div>
     <div class="info-card" id="pre-best-card" style="display:none"><h3>🏆 สถิติ</h3><div id="pre-best" style="color:#f0c030;font-size:1.1em;letter-spacing:3px;"></div></div>
   </div>
   <button class="start-btn" onclick="startChapter()">⚔️ ดับมอน!</button>
@@ -185,21 +177,21 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
 // IMAGE ASSETS
 // ══════════════════════════════════════════
 const IMG_SRCS = {
-  bg_forest:  'assest/bg_forest.png.png',
-  bg_castle:  'assest/bg_castle.png.png',
-  bg_cave:    'assest/bg_cave.png.png',
-  tw_castle:  'assest/tower_castle.png.png',
-  tw_magic:   'assest/tower_magic.png.png',
-  proj:       'assest/projectile.png.png',
-  coin:       'assest/coin.png.png',
-  mn_purple:  'assest/monster_normal_purple.png',
-  mn_orange:  'assest/monster_normal_orange.png',
-  mn_red:     'assest/monster_normal_red.png',
-  mn_green:   'assest/monster_normal_green.png',
-  mn_blue:    'assest/monster_normal_blue.png',
+  bg_forest:   'assest/bg_forest.png.png',
+  bg_castle:   'assest/bg_castle.png.png',
+  bg_cave:     'assest/bg_cave.png.png',
+  tw_castle:   'assest/tower_castle.png.png',
+  tw_magic:    'assest/tower_magic.png.png',
+  proj:        'assest/projectile.png.png',
+  coin:        'assest/coin.png.png',
+  mn_purple:   'assest/monster_normal_purple.png',
+  mn_orange:   'assest/monster_normal_orange.png',
+  mn_red:      'assest/monster_normal_red.png',
+  mn_green:    'assest/monster_normal_green.png',
+  mn_blue:     'assest/monster_normal_blue.png',
   mt_darkgreen:'assest/monster_tank_darkgreen.png',
-  mt_navy:    'assest/monster_tank_navy.png',
-  mb_red:     'assest/monster_boss_red.png',
+  mt_navy:     'assest/monster_tank_navy.png',
+  mb_red:      'assest/monster_boss_red.png',
   mb_darkpurple:'assest/monster_boss_darkpurple.png',
 };
 const IMGS = {};
@@ -343,16 +335,31 @@ function genChoices(ans){const s=new Set([ans]);const dl=[1,2,3,4,5,6,7,8,10,12,
 const LIVES_MAX=5,TOWER_COST=30;
 let GS=null,animID=null;
 
+// ── Tower placement ──────────────────────
+// placingTower: 0 = not placing, 1 = placing tower1, 2 = placing tower2
+let ghostX=-999,ghostY=-999; // mouse/touch pos for ghost
+
 function startChapter(){
   if(animID){cancelAnimationFrame(animID);animID=null;}
   const ch=CHAPTERS[curGrade][curChIdx];
-  GS={ch,theme:THEMES[ch.wk],lives:LIVES_MAX,coins:0,streak:0,wave:0,enemies:[],projectiles:[],particles:[],spawnTimer:-90,spawnInterval:100,spawnCount:0,spawnMax:0,curQ:null,qAnswered:false,towers:[],tower2Active:false,WP:[],SLOTS:[],canW:0,canH:0,tick:0,phase:'playing'};
+  GS={ch,theme:THEMES[ch.wk],lives:LIVES_MAX,coins:0,streak:0,wave:0,
+      enemies:[],projectiles:[],particles:[],
+      spawnTimer:-180,spawnInterval:100,spawnCount:0,spawnMax:0,
+      curQ:null,qAnswered:false,towers:[],tower2Active:false,
+      placingTower:1, // start in placement mode for tower 1
+      WP:[],SLOTS:[],canW:0,canH:0,tick:0,phase:'playing'};
   setupCanvas();
-  GS.towers=[{x:GS.SLOTS[0].x,y:GS.SLOTS[0].y,lv:1}];
-  updateHUD();updateBuyBtn();beginWave();newQuestion();
+  updateHUD();updateBuyBtn();
+  newQuestion();
   goScreen('sc-game');
+  // register canvas events
+  const cv=document.getElementById('gCanvas');
+  cv.onclick=handleCanvasClick;
+  cv.ontouchend=handleCanvasTouch;
+  cv.onmousemove=handleMouseMove;
   animID=requestAnimationFrame(gameLoop);
 }
+
 function setupCanvas(){
   const cv=document.getElementById('gCanvas');
   const uiH=document.querySelector('.game-ui').offsetHeight||185;
@@ -362,16 +369,83 @@ function setupCanvas(){
   GS.WP=[{x:W+60,y:H*.22},{x:W*.72,y:H*.22},{x:W*.28,y:H*.76},{x:-70,y:H*.76}];
   GS.SLOTS=[{x:W*.82,y:H*.58},{x:W*.18,y:H*.40}];
 }
-function beginWave(){GS.spawnCount=0;GS.spawnMax=4+GS.wave*2;GS.spawnTimer=-80;GS.spawnInterval=Math.max(50,105-GS.wave*10);updateHUD();}
+
+// ── Path distance check ──────────────────
+function distToSegment(px,py,ax,ay,bx,by){
+  const dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;
+  if(len2===0)return Math.hypot(px-ax,py-ay);
+  let t=((px-ax)*dx+(py-ay)*dy)/len2;
+  t=Math.max(0,Math.min(1,t));
+  return Math.hypot(px-(ax+t*dx),py-(ay+t*dy));
+}
+function nearPath(x,y,margin){
+  const WP=GS.WP;
+  for(let i=0;i<WP.length-1;i++){
+    if(distToSegment(x,y,WP[i].x,WP[i].y,WP[i+1].x,WP[i+1].y)<margin)return true;
+  }
+  return false;
+}
+
+// ── Place tower at position ──────────────
+function placeTowerAt(x,y){
+  if(!GS||GS.placingTower===0)return;
+  const W=GS.canW,H=GS.canH;
+  const minX=50,maxX=W-50,minY=40,maxY=H-40;
+  if(x<minX||x>maxX||y<minY||y>maxY){addParticle(x,y,'⚠️ ขอบเกิน',16);return;}
+  const pathMargin=H*.09;
+  if(nearPath(x,y,pathMargin)){addParticle(x,y,'⚠️ ใกล้เส้นทาง',16);return;}
+  // check not overlapping existing tower
+  for(const tw of GS.towers){if(Math.hypot(tw.x-x,tw.y-y)<60){addParticle(x,y,'⚠️ ใกล้ป้อมเดิม',16);return;}}
+  const idx=GS.placingTower-1;
+  GS.towers[idx]={x,y,lv:1};
+  addParticle(x,y,'🏰 วางป้อมแล้ว!',18);
+  GS.placingTower=0;
+  if(idx===0){beginWave();}
+  updateBuyBtn();
+}
+
+function handleCanvasClick(e){
+  if(!GS||GS.placingTower===0)return;
+  const rect=e.target.getBoundingClientRect();
+  const scaleX=GS.canW/rect.width,scaleY=GS.canH/rect.height;
+  placeTowerAt((e.clientX-rect.left)*scaleX,(e.clientY-rect.top)*scaleY);
+}
+function handleCanvasTouch(e){
+  if(!GS||GS.placingTower===0)return;
+  e.preventDefault();
+  const rect=e.target.getBoundingClientRect();
+  const touch=e.changedTouches[0];
+  const scaleX=GS.canW/rect.width,scaleY=GS.canH/rect.height;
+  placeTowerAt((touch.clientX-rect.left)*scaleX,(touch.clientY-rect.top)*scaleY);
+}
+function handleMouseMove(e){
+  if(!GS||GS.placingTower===0)return;
+  const rect=e.target.getBoundingClientRect();
+  const scaleX=GS.canW/rect.width,scaleY=GS.canH/rect.height;
+  ghostX=(e.clientX-rect.left)*scaleX;
+  ghostY=(e.clientY-rect.top)*scaleY;
+}
+
+function beginWave(){
+  GS.spawnCount=0;
+  GS.spawnMax=4+GS.wave*2;
+  GS.spawnTimer=-60; // shorter wave intro
+  GS.spawnInterval=Math.max(38,90-GS.wave*10);
+  updateHUD();
+}
+
 function spawnEnemy(){
   const isBoss=GS.wave===GS.ch.waves-1&&GS.spawnCount===GS.spawnMax-1;
   const isHeavy=GS.spawnCount%4===3;
-  const spd=0.65+GS.wave*0.15;
+  // ── FASTER speeds ──
+  const spd=1.1+GS.wave*0.18;
   const hp=isBoss?12+GS.wave*4:isHeavy?4+GS.wave:2+Math.floor(GS.wave*.7);
   const keys=isBoss?BS_KEYS:isHeavy?TK_KEYS:NM_KEYS;
   const imgKey=keys[Math.floor(Math.random()*keys.length)];
   const num=ri(0,9);
-  GS.enemies.push({x:GS.WP[0].x,y:GS.WP[0].y,wpIdx:1,hp,maxHp:hp,speed:spd*(isBoss?.42:isHeavy?.68:1),type:isBoss?'boss':isHeavy?'tank':'normal',imgKey,num,dead:false});
+  GS.enemies.push({x:GS.WP[0].x,y:GS.WP[0].y,wpIdx:1,hp,maxHp:hp,
+    speed:spd*(isBoss?.50:isHeavy?.70:1),
+    type:isBoss?'boss':isHeavy?'tank':'normal',imgKey,num,dead:false});
   GS.spawnCount++;
 }
 
@@ -388,21 +462,110 @@ function answerQ(val,btn){
   if(GS.qAnswered||GS.phase!=='playing')return;
   GS.qAnswered=true;
   const ok=Math.abs(val-GS.curQ.ans)<0.01;
-  if(ok){btn.classList.add('correct');GS.streak++;GS.coins+=GS.streak>=3?10:5;if(GS.streak>=3)addParticle(GS.canW/2,GS.canH*.25,'🔥 +10',22);fireAllTowers();updateHUD();updateBuyBtn();setTimeout(()=>{if(GS.phase==='playing')newQuestion();},480);}
-  else{btn.classList.add('wrong');GS.streak=0;document.querySelectorAll('.ans-btn').forEach(b=>{if(Math.abs(+b.textContent-GS.curQ.ans)<0.01)b.classList.add('correct');});updateHUD();setTimeout(()=>{if(GS.phase==='playing')newQuestion();},1100);}
+  if(ok){
+    btn.classList.add('correct');GS.streak++;
+    GS.coins+=GS.streak>=3?10:5;
+    if(GS.streak>=3)addParticle(GS.canW/2,GS.canH*.25,'🔥 +10',22);
+    fireAllTowers();updateHUD();updateBuyBtn();
+    setTimeout(()=>{if(GS.phase==='playing')newQuestion();},380);
+  } else {
+    btn.classList.add('wrong');GS.streak=0;
+    document.querySelectorAll('.ans-btn').forEach(b=>{if(Math.abs(+b.textContent-GS.curQ.ans)<0.01)b.classList.add('correct');});
+    updateHUD();
+    setTimeout(()=>{if(GS.phase==='playing')newQuestion();},900);
+  }
 }
+
+// ── Arc projectile: bezier from tower to target ──
+// p = {sx,sy,cx,cy (control pt), tx,ty (target snap), target (live obj), t (0→1), spd, dmg, chains, x, y}
 function fireAllTowers(){
   const alive=GS.enemies.filter(e=>!e.dead);if(!alive.length)return;
-  const target=alive.reduce((b,e)=>e.wpIdx>b.wpIdx||(e.wpIdx===b.wpIdx&&e.x<b.x)?e:b,alive[0]);
-  GS.towers.forEach(tw=>{GS.projectiles.push({x:tw.x,y:tw.y,target,spd:11,dmg:3+tw.lv,hit:false});});
+  // target = frontmost enemy (highest wpIdx, then closest to next WP)
+  const target=alive.reduce((b,e)=>{
+    if(e.wpIdx>b.wpIdx)return e;
+    if(e.wpIdx===b.wpIdx){
+      const distE=Math.hypot(e.x-GS.WP[e.wpIdx].x,e.y-GS.WP[e.wpIdx].y);
+      const distB=Math.hypot(b.x-GS.WP[b.wpIdx].x,b.y-GS.WP[b.wpIdx].y);
+      return distE<distB?e:b;
+    }
+    return b;
+  },alive[0]);
+
+  GS.towers.forEach((tw,i)=>{
+    const proj=makeProjToTarget(tw.x,tw.y,target,3+tw.lv,1);
+    GS.projectiles.push(proj);
+  });
 }
+
+function makeProjToTarget(sx,sy,target,dmg,chains){
+  // control point: midpoint offset perpendicular, curves upward/downward
+  const tx=target.x,ty=target.y;
+  const mx=(sx+tx)/2,my=(sy+ty)/2;
+  const dx=tx-sx,dy=ty-sy;
+  const len=Math.hypot(dx,dy)||1;
+  const arcH=Math.min(len*.45,90);
+  // perp dir (always upward bias)
+  const perpX=-dy/len,perpY=dx/len;
+  const flip=perpY>0?-1:1; // prefer arcing upward
+  const cx=mx+perpX*arcH*flip,cy=my+perpY*arcH*flip;
+  return{sx,sy,cx,cy,tx,ty,target,t:0,spd:0.055,dmg,chains,hit:false,x:sx,y:sy};
+}
+
+function updateProjectile(p){
+  if(p.hit)return;
+  const t=p.target;
+  if(t.dead){
+    // CHAIN: find nearest living enemy
+    if(p.chains>0){
+      const next=GS.enemies.filter(e=>!e.dead)
+        .sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];
+      if(next){
+        const np=makeProjToTarget(p.x,p.y,next,p.dmg,p.chains-1);
+        Object.assign(p,np); // reuse same object
+        addParticle(p.x,p.y,'⚡',14);
+        return;
+      }
+    }
+    p.hit=true;return;
+  }
+  // update end point to track moving target
+  p.tx=t.x;p.ty=t.y;
+  p.t+=p.spd;
+  if(p.t>=1){p.t=1;}
+  const mt=p.t;
+  const imt=1-mt;
+  p.x=imt*imt*p.sx+2*imt*mt*p.cx+mt*mt*p.tx;
+  p.y=imt*imt*p.sy+2*imt*mt*p.cy+mt*mt*p.ty;
+  if(p.t>=0.92||Math.hypot(p.x-t.x,p.y-t.y)<14){
+    p.hit=true;
+    t.hp-=p.dmg;
+    if(t.hp<=0){
+      t.dead=true;
+      GS.coins+=t.type==='boss'?20:t.type==='tank'?8:4;
+      updateHUD();updateBuyBtn();
+      // spawn coin particle
+      addParticle(t.x,t.y-20,t.type==='boss'?'+20🪙':t.type==='tank'?'+8🪙':'+4🪙',14);
+    }
+  }
+}
+
 function buyTower(){
   if(GS.tower2Active||GS.coins<TOWER_COST)return;
-  GS.coins-=TOWER_COST;GS.tower2Active=true;GS.towers.push({x:GS.SLOTS[1].x,y:GS.SLOTS[1].y,lv:1});
-  updateHUD();updateBuyBtn();addParticle(GS.SLOTS[1].x,GS.SLOTS[1].y,'🏰 ซื้อแล้ว!',18);
+  GS.coins-=TOWER_COST;GS.tower2Active=true;
+  GS.placingTower=2; // enter placement mode for tower 2
+  updateHUD();updateBuyBtn();
+  addParticle(GS.canW/2,GS.canH/2,'🏰 แตะเพื่อวางป้อม!',20);
 }
-function updateBuyBtn(){if(!GS)return;const btn=document.getElementById('buy-btn');if(GS.tower2Active){btn.innerHTML='✅ 2<br>ป้อม';btn.classList.add('owned');btn.disabled=true;return;}btn.classList.remove('owned');btn.disabled=GS.coins<TOWER_COST;btn.innerHTML=`🏰<br>${TOWER_COST}🪙`;}
-function addParticle(x,y,text,size){GS.particles.push({x,y,text,size:size||16,life:80,maxLife:80});}
+
+function updateBuyBtn(){
+  if(!GS)return;
+  const btn=document.getElementById('buy-btn');
+  if(GS.tower2Active){btn.innerHTML='✅ 2<br>ป้อม';btn.classList.add('owned');btn.disabled=true;return;}
+  btn.classList.remove('owned');
+  btn.disabled=GS.coins<TOWER_COST;
+  btn.innerHTML=`🏰<br>${TOWER_COST}🪙`;
+}
+function addParticle(x,y,text,size){GS.particles.push({x,y,text,size:size||16,life:80,maxLife:80,vy:-1.2});}
 function updateHUD(){if(!GS)return;document.getElementById('hud-lives').textContent='❤️'.repeat(GS.lives)+'🖤'.repeat(LIVES_MAX-GS.lives);document.getElementById('hud-coins').textContent='🪙 '+GS.coins+(GS.streak>=3?' 🔥×'+GS.streak:'');document.getElementById('hud-wave').textContent=`⚔️ คลื่น ${Math.min(GS.wave+1,GS.ch.waves)}/${GS.ch.waves}`;}
 
 // ══════════════════════════════════════════
@@ -413,71 +576,72 @@ function gameLoop(){
   GS.tick++;
   const cv=document.getElementById('gCanvas');
   const ctx=cv.getContext('2d');
-  if(GS.spawnCount<GS.spawnMax&&GS.phase==='playing'){GS.spawnTimer++;if(GS.spawnTimer>=GS.spawnInterval){spawnEnemy();GS.spawnTimer=0;}}
+
+  // spawn enemies only after tower placed
+  if(GS.placingTower===0&&GS.towers.length>0){
+    if(GS.spawnCount<GS.spawnMax&&GS.phase==='playing'){
+      GS.spawnTimer++;
+      if(GS.spawnTimer>=GS.spawnInterval){spawnEnemy();GS.spawnTimer=0;}
+    }
+  }
+
+  // move enemies
   for(const e of GS.enemies){
     if(e.dead||e.wpIdx>=GS.WP.length)continue;
     const wp=GS.WP[e.wpIdx];const dx=wp.x-e.x,dy=wp.y-e.y,dist=Math.hypot(dx,dy);
-    if(dist<e.speed+2){e.x=wp.x;e.y=wp.y;e.wpIdx++;if(e.wpIdx>=GS.WP.length){e.dead=true;GS.lives--;if(GS.lives<=0){endGame(false);return;}updateHUD();}}
-    else{e.x+=dx/dist*e.speed;e.y+=dy/dist*e.speed;}
+    if(dist<e.speed+2){
+      e.x=wp.x;e.y=wp.y;e.wpIdx++;
+      if(e.wpIdx>=GS.WP.length){e.dead=true;GS.lives--;if(GS.lives<=0){endGame(false);return;}updateHUD();}
+    } else {e.x+=dx/dist*e.speed;e.y+=dy/dist*e.speed;}
   }
-  for(const p of GS.projectiles){
-    if(p.hit)continue;const t=p.target;if(t.dead){p.hit=true;continue;}
-    const dx=t.x-p.x,dy=t.y-p.y,dist=Math.hypot(dx,dy);
-    if(dist<p.spd+8){p.hit=true;t.hp-=p.dmg;if(t.hp<=0){t.dead=true;GS.coins+=t.type==='boss'?20:t.type==='tank'?8:4;updateHUD();updateBuyBtn();}}
-    else{p.x+=dx/dist*p.spd;p.y+=dy/dist*p.spd;}
-  }
-  GS.particles.forEach(p=>{p.life--;p.y-=0.7;});
+
+  // update projectiles (arc + chain)
+  for(const p of GS.projectiles) updateProjectile(p);
+
+  // particles
+  GS.particles.forEach(p=>{p.life--;p.y+=p.vy||-.7;});
+
+  // cleanup
   GS.enemies=GS.enemies.filter(e=>!e.dead);
   GS.projectiles=GS.projectiles.filter(p=>!p.hit);
   GS.particles=GS.particles.filter(p=>p.life>0);
-  if(GS.spawnCount>=GS.spawnMax&&GS.enemies.length===0&&GS.phase==='playing'){GS.wave++;if(GS.wave>=GS.ch.waves){endGame(true);return;}beginWave();}
+
+  if(GS.placingTower===0&&GS.spawnCount>=GS.spawnMax&&GS.enemies.length===0&&GS.phase==='playing'){
+    GS.wave++;
+    if(GS.wave>=GS.ch.waves){endGame(true);return;}
+    beginWave();
+  }
+
   draw(ctx,GS.canW,GS.canH);
   animID=requestAnimationFrame(gameLoop);
 }
 
 // ══════════════════════════════════════════
-// DRAWING — IMAGE-BASED
+// DRAWING
 // ══════════════════════════════════════════
 function draw(ctx,W,H){
   const t=GS.theme;
-  // ── BACKGROUND IMAGE ──
   const bgKey={'forest':'bg_forest','castle':'bg_castle','cave':'bg_cave'}[GS.ch.wk];
   const bgImg=IMGS[bgKey];
-  if(bgImg){
-    ctx.drawImage(bgImg,0,0,W,H);
-  } else {
-    // fallback gradient
+  if(bgImg){ctx.drawImage(bgImg,0,0,W,H);}
+  else{
     const sky=ctx.createLinearGradient(0,0,0,H);
     sky.addColorStop(0,t.sky0);sky.addColorStop(1,t.sky1);
     ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
     ctx.fillStyle=t.ground;ctx.fillRect(0,H*.65,W,H*.35);
   }
-  // slight dark overlay for readability
   ctx.fillStyle='rgba(0,0,0,.18)';ctx.fillRect(0,0,W,H);
 
   drawPath(ctx,W,H);
-  drawSlot2Ghost(ctx);
+
+  // ghost tower for placement
+  if(GS.placingTower>0){
+    drawPlacementGhost(ctx,W,H);
+  }
+
   GS.towers.forEach((tw,i)=>drawTower(ctx,tw,i));
   GS.enemies.forEach(e=>drawMonster(ctx,e));
-
-  // Projectiles
-  GS.projectiles.forEach(p=>{
-    if(p.hit)return;
-    const pi=IMGS.proj;
-    if(pi){
-      const ps=18;ctx.save();
-      const angle=Math.atan2(p.target.y-p.y,p.target.x-p.x);
-      ctx.translate(p.x,p.y);ctx.rotate(angle);
-      ctx.drawImage(pi,-ps/2,-ps/2,ps,ps);
-      ctx.restore();
-    } else {
-      ctx.save();ctx.strokeStyle='#f0c030';ctx.lineWidth=3;ctx.shadowBlur=8;ctx.shadowColor='#f0c030';
-      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.target.x,p.target.y);ctx.stroke();
-      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill();ctx.restore();
-    }
-  });
-
-  // Particles
+  GS.projectiles.forEach(p=>drawProjectile(ctx,p));
   GS.particles.forEach(p=>{
     const a=p.life/p.maxLife;ctx.save();ctx.globalAlpha=a;
     ctx.font=`bold ${p.size}px 'Kanit',sans-serif`;ctx.textAlign='center';
@@ -485,15 +649,40 @@ function draw(ctx,W,H){
     ctx.fillStyle='#f0c030';ctx.fillText(p.text,p.x,p.y);ctx.restore();
   });
 
-  // Wave banner
-  if(GS.spawnTimer<0&&GS.spawnCount===0&&GS.enemies.length===0){
-    const pr=Math.min(1,(-GS.spawnTimer)/80);
+  // wave banner
+  if(GS.placingTower===0&&GS.spawnTimer<0&&GS.spawnCount===0&&GS.enemies.length===0){
+    const pr=Math.min(1,(-GS.spawnTimer)/60);
     ctx.save();ctx.globalAlpha=Math.min(1,pr*2);
     ctx.fillStyle='rgba(0,0,0,.65)';roundRect(ctx,W/2-150,H/2-28,300,56,14);ctx.fill();
     ctx.strokeStyle='rgba(240,192,48,.6)';ctx.lineWidth=2;roundRect(ctx,W/2-150,H/2-28,300,56,14);ctx.stroke();
     ctx.font=`bold 20px 'Kanit',sans-serif`;ctx.textAlign='center';ctx.fillStyle='#f0c030';
     ctx.fillText(`⚔️ คลื่นที่ ${GS.wave+1} บุกมาแล้ว!`,W/2,H/2+7);ctx.restore();
   }
+
+  // placement mode UI banner
+  if(GS.placingTower>0){
+    const pulse=0.7+0.3*Math.sin(GS.tick*.1);
+    ctx.save();ctx.globalAlpha=pulse;
+    ctx.fillStyle='rgba(0,0,0,.75)';roundRect(ctx,W/2-180,16,360,44,12);ctx.fill();
+    ctx.strokeStyle='#f0c030';ctx.lineWidth=2;roundRect(ctx,W/2-180,16,360,44,12);ctx.stroke();
+    ctx.font=`bold 17px 'Kanit',sans-serif`;ctx.textAlign='center';ctx.fillStyle='#f0c030';
+    ctx.fillText(`🏰 แตะตำแหน่งที่ต้องการวางป้อม!`,W/2,43);ctx.restore();
+  }
+}
+
+function drawPlacementGhost(ctx,W,H){
+  const gx=ghostX,gy=ghostY;
+  if(gx<0||gx>W)return;
+  const img=IMGS.tw_castle;
+  const tw_w=72,tw_h=90;
+  const valid=!nearPath(gx,gy,H*.09)&&gx>50&&gx<W-50&&gy>40&&gy<H-40;
+  ctx.save();ctx.globalAlpha=0.5;
+  if(img){ctx.drawImage(img,gx-tw_w/2,gy-tw_h*.85,tw_w,tw_h);}
+  else{ctx.font='32px serif';ctx.textAlign='center';ctx.fillStyle=valid?'#f0c030':'#e74c3c';ctx.fillText('🏰',gx,gy);}
+  // ring indicator
+  ctx.strokeStyle=valid?'#f0c030':'#e74c3c';ctx.lineWidth=2;
+  ctx.setLineDash([6,4]);ctx.beginPath();ctx.arc(gx,gy,38,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();ctx.textAlign='left';
 }
 
 function drawPath(ctx,W,H){
@@ -505,25 +694,10 @@ function drawPath(ctx,W,H){
 }
 function tracePath(ctx,WP){ctx.beginPath();ctx.moveTo(WP[0].x,WP[0].y);for(let i=1;i<WP.length;i++)ctx.lineTo(WP[i].x,WP[i].y);}
 
-function drawSlot2Ghost(ctx){
-  if(GS.tower2Active)return;
-  const s=GS.SLOTS[1],canBuy=GS.coins>=TOWER_COST;
-  const img=IMGS.tw_magic;
-  ctx.save();ctx.globalAlpha=canBuy?.55:.25;
-  if(img){ctx.drawImage(img,s.x-30,s.y-60,60,75);}
-  else{ctx.fillStyle=canBuy?'rgba(240,192,48,.3)':'rgba(255,255,255,.1)';ctx.beginPath();ctx.arc(s.x,s.y,24,0,Math.PI*2);ctx.fill();}
-  ctx.font=`bold 12px 'Kanit',sans-serif`;ctx.textAlign='center';
-  ctx.fillStyle=canBuy?'#f0c030':'#aaa';ctx.strokeStyle='rgba(0,0,0,.6)';ctx.lineWidth=2;
-  ctx.strokeText(`${TOWER_COST}🪙`,s.x,s.y+28);ctx.fillText(`${TOWER_COST}🪙`,s.x,s.y+28);
-  ctx.restore();ctx.textAlign='left';
-}
-
 function drawTower(ctx,tw,idx){
   const key=idx===0?'tw_castle':'tw_magic';
-  const img=IMGS[key];
-  const tw_w=72,tw_h=90;
+  const img=IMGS[key];const tw_w=72,tw_h=90;
   ctx.save();
-  // shadow
   ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.ellipse(tw.x,tw.y+tw_h*.45,tw_w*.45,tw_w*.15,0,0,Math.PI*2);ctx.fill();
   if(img){ctx.drawImage(img,tw.x-tw_w/2,tw.y-tw_h*.85,tw_w,tw_h);}
   else{ctx.font='32px serif';ctx.textAlign='center';ctx.fillText(idx===0?'🏰':'⚔️',tw.x,tw.y);}
@@ -536,22 +710,15 @@ function drawMonster(ctx,e){
   const sz=e.type==='boss'?70:e.type==='tank'?54:42;
   const bob=Math.sin(GS.tick*.14+e.x*.01)*2;
   ctx.save();
-  // shadow
   ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.ellipse(e.x,e.y+sz*.45,sz*.42,sz*.14,0,0,Math.PI*2);ctx.fill();
-  if(img){
-    ctx.drawImage(img,e.x-sz/2,e.y-sz+bob,sz,sz);
-  } else {
-    ctx.font=`${sz*.9}px serif`;ctx.textAlign='center';ctx.fillText('👾',e.x,e.y+bob);
-  }
-  // Number overlay on monster belly
+  if(img){ctx.drawImage(img,e.x-sz/2,e.y-sz+bob,sz,sz);}
+  else{ctx.font=`${sz*.9}px serif`;ctx.textAlign='center';ctx.fillText('👾',e.x,e.y+bob);}
   const numSz=Math.round(sz*.38);
   ctx.font=`bold ${numSz}px 'Kanit',sans-serif`;ctx.textAlign='center';
   const ny=e.y+bob+sz*.12;
-  ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=numSz*.2;
-  ctx.strokeText(e.num,e.x,ny);
+  ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=numSz*.2;ctx.strokeText(e.num,e.x,ny);
   ctx.fillStyle='#fff';ctx.fillText(e.num,e.x,ny);
   ctx.restore();ctx.textAlign='left';
-  // HP bar
   const bw=e.type==='boss'?62:e.type==='tank'?46:32;
   const by=e.y-sz-4,pct=e.hp/e.maxHp;
   ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(e.x-bw/2,by,bw,6);
@@ -560,6 +727,52 @@ function drawMonster(ctx,e){
   ctx.fillStyle=hg;ctx.fillRect(e.x-bw/2,by,bw*pct,6);
   ctx.strokeStyle='rgba(0,0,0,.4)';ctx.lineWidth=1;ctx.strokeRect(e.x-bw/2,by,bw,6);
 }
+
+function drawProjectile(p){
+  if(p.hit)return;
+  // draw arc trail
+  ctx_trail(p);
+  const pi=IMGS.proj;
+  const ps=20;
+  ctx_tmp(()=>{
+    const cv=document.getElementById('gCanvas');
+    const ctx=cv.getContext('2d');
+    // glow
+    ctx.save();
+    ctx.shadowBlur=12;ctx.shadowColor='#f0c030';
+    if(pi){
+      const angle=Math.atan2(p.ty-p.sy,p.tx-p.sx);
+      ctx.translate(p.x,p.y);ctx.rotate(angle);
+      ctx.drawImage(pi,-ps/2,-ps/2,ps,ps);
+    } else {
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#f0c030';ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+    }
+    ctx.restore();
+  });
+}
+
+// draw bezier arc trail behind projectile
+function ctx_trail(p){
+  const cv=document.getElementById('gCanvas');
+  const ctx=cv.getContext('2d');
+  if(p.t<0.05)return;
+  ctx.save();
+  ctx.strokeStyle='rgba(240,192,48,0.35)';ctx.lineWidth=2;ctx.lineCap='round';
+  ctx.shadowBlur=6;ctx.shadowColor='rgba(240,192,48,0.5)';
+  ctx.beginPath();
+  // draw bezier arc from start to current pos using a sampled sub-curve
+  const steps=12;
+  for(let i=0;i<=steps;i++){
+    const mt=p.t*(i/steps);const imt=1-mt;
+    const bx=imt*imt*p.sx+2*imt*mt*p.cx+mt*mt*p.tx;
+    const by=imt*imt*p.sy+2*imt*mt*p.cy+mt*mt*p.ty;
+    if(i===0)ctx.moveTo(bx,by);else ctx.lineTo(bx,by);
+  }
+  ctx.stroke();ctx.restore();
+}
+
+function ctx_tmp(fn){fn();}
 
 function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
 
@@ -583,7 +796,7 @@ function endGame(won){
     document.getElementById('res-stars').textContent='';document.getElementById('res-sub').textContent=`ลองใหม่นะ! ได้เหรียญ ${GS.coins}`;
     document.getElementById('res-next').style.display='none';
   }
-  setTimeout(()=>goScreen('sc-result'),800);
+  setTimeout(()=>goScreen('sc-result'),700);
 }
 function nextChapter(){const ni=curChIdx+1;if(ni<CHAPTERS[curGrade].length)openChapter(ni);else{renderMap();goScreen('sc-map');}}
 
@@ -592,10 +805,7 @@ function nextChapter(){const ni=curChIdx+1;if(ni<CHAPTERS[curGrade].length)openC
 // ══════════════════════════════════════════
 window.addEventListener('resize',()=>{if(GS&&GS.phase==='playing')setupCanvas();});
 loadSave();
-// Preload images → show title
-preloadImages(()=>{
-  goScreen('sc-title');
-});
+preloadImages(()=>{goScreen('sc-title');});
 </script>
 </body>
 </html>

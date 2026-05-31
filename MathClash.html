@@ -116,6 +116,9 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
     <button class="grade-btn" onclick="selGrade('p5')"><span class="g-icon">🏹</span><div class="g-label">ป.5</div><div class="g-topic">เศษส่วน</div><div class="g-prog" id="gs-p5"></div></button>
     <button class="grade-btn" onclick="selGrade('p6')"><span class="g-icon">🔮</span><div class="g-label">ป.6</div><div class="g-topic">ร้อยละ</div><div class="g-prog" id="gs-p6"></div></button>
   </div>
+  <div style="margin-top:22px;text-align:center;">
+    <button onclick="resetConfirm()" style="background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#e74c3c;padding:8px 20px;border-radius:10px;font-size:.8em;cursor:pointer;font-family:inherit;">🗑️ รีเซ็ตข้อมูลทั้งหมด</button>
+  </div>
 </div>
 
 <!-- MAP -->
@@ -432,7 +435,7 @@ function handleMouseMove(e){
 
 function beginWave(){
   GS.spawnCount=0;
-  GS.spawnMax=4+GS.wave*2;
+  GS.spawnMax=6+GS.wave*3;
   GS.spawnTimer=-60; // shorter wave intro
   GS.spawnInterval=Math.max(38,90-GS.wave*10);
   updateHUD();
@@ -677,7 +680,7 @@ function draw(ctx,W,H){
 function drawPlacementGhost(ctx,W,H){
   const gx=ghostX,gy=ghostY;
   if(gx<0||gx>W)return;
-  const img=IMGS.tw_castle;
+  const img=GS.placingTower===2?IMGS.tw_magic:IMGS.tw_castle;
   const tw_w=72,tw_h=90;
   const valid=!nearPath(gx,gy,H*.09)&&gx>50&&gx<W-50&&gy>40&&gy<H-40;
   ctx.save();ctx.globalAlpha=0.5;
@@ -791,6 +794,14 @@ function endGame(won){
 }
 function nextChapter(){const ni=curChIdx+1;if(ni<CHAPTERS[curGrade].length)openChapter(ni);else{renderMap();goScreen('sc-map');}}
 function quitGame(){if(animID){cancelAnimationFrame(animID);animID=null;}GS=null;renderMap();goScreen('sc-map');}
+function resetConfirm(){
+  if(!confirm('⚠️ ลบข้อมูลการเล่นทั้งหมด?\nดาวและความก้าวหน้าทุกชั้นจะหายหมด'))return;
+  localStorage.removeItem('mc_save');
+  saveData={};
+  ['p1','p4','p5','p6'].forEach(g=>{saveData[g]={chapter:0,stars:{}};});
+  refreshGradeStars();
+  alert('✅ รีเซ็ตเรียบร้อย!');
+}
 
 // ══════════════════════════════════════════
 // INIT

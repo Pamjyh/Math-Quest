@@ -10,145 +10,97 @@
 body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidden;height:100vh;width:100vw;}
 .screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;}
 .screen.active{display:flex;}
-
-/* ─── TITLE SCREEN ─── */
-#sc-title{
-  background:radial-gradient(ellipse at 50% 30%,#1a3a1a 0%,#0d1f0d 50%,#050a05 100%);
-  overflow:hidden;
-}
-#sc-title::before{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,215,0,.15)'/%3E%3C/svg%3E") repeat;
-  animation:starFloat 20s linear infinite;pointer-events:none;
-}
-@keyframes starFloat{from{background-position:0 0}to{background-position:60px 60px}}
-.title-logo{width:min(92vw,520px);height:auto;filter:drop-shadow(0 8px 32px rgba(240,165,0,.5));
-  animation:logoBob 3s ease-in-out infinite;}
+/* TITLE */
+#sc-title{background:radial-gradient(ellipse at 50% 30%,#1a3a1a 0%,#0a0a14 100%);}
+.title-logo{width:min(92vw,520px);height:auto;filter:drop-shadow(0 8px 32px rgba(240,165,0,.5));animation:logoBob 3s ease-in-out infinite;}
 @keyframes logoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .title-btns{margin-top:8px;display:flex;flex-direction:column;gap:10px;width:min(88vw,340px);}
-.title-play{padding:16px;background:linear-gradient(135deg,#c8a215,#f0c030,#c8a215);
-  color:#3d2000;border:none;border-radius:14px;font-size:1.3em;font-weight:900;
-  cursor:pointer;font-family:inherit;box-shadow:0 4px 20px rgba(240,192,48,.5);
-  text-shadow:0 1px 0 rgba(255,255,255,.3);transition:.15s;}
+.title-play{padding:16px;background:linear-gradient(135deg,#c8a215,#f0c030,#c8a215);color:#3d2000;border:none;border-radius:14px;font-size:1.3em;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 4px 20px rgba(240,192,48,.5);transition:.15s;}
 .title-play:active{transform:scale(.96);}
-.title-grades{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:4px;}
-.tg{padding:4px 12px;background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);
-  border-radius:16px;font-size:.78em;color:#f0c030;font-family:inherit;}
-
-/* ─── GRADE SELECT ─── */
+.title-grades{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.tg{padding:4px 12px;background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);border-radius:16px;font-size:.78em;color:#f0c030;font-family:inherit;}
+/* GRADE */
 #sc-grade{background:radial-gradient(ellipse at 50% 0%,#1a3a1a,#0a0a14);}
 .grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(92vw,380px);}
-.grade-btn{
-  padding:20px 12px 16px;border-radius:18px;cursor:pointer;font-family:inherit;color:#fff;
-  transition:.2s;text-align:center;border:2px solid rgba(240,192,48,.25);
-  background:linear-gradient(160deg,rgba(240,192,48,.08),rgba(0,0,0,.3));
-  position:relative;overflow:hidden;
-}
-.grade-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent);pointer-events:none;}
+.grade-btn{padding:20px 12px 16px;border-radius:18px;cursor:pointer;font-family:inherit;color:#fff;transition:.2s;text-align:center;border:2px solid rgba(240,192,48,.25);background:linear-gradient(160deg,rgba(240,192,48,.08),rgba(0,0,0,.3));}
 .grade-btn:hover,.grade-btn:active{transform:scale(1.05);border-color:rgba(240,192,48,.6);box-shadow:0 0 20px rgba(240,192,48,.3);}
 .g-icon{font-size:2.2em;display:block;margin-bottom:6px;}
 .g-label{font-size:1.2em;font-weight:900;color:#f0c030;}
 .g-topic{font-size:.75em;color:#bbb;margin-top:3px;}
 .g-prog{font-size:.72em;color:#f0c030;margin-top:5px;min-height:1em;}
-
-/* ─── SHARED UI ─── */
-.back-btn{
-  background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);
-  color:#f0c030;padding:8px 18px;border-radius:10px;cursor:pointer;font-size:.9em;font-family:inherit;
-}
-.gold-title{color:#f0c030;font-size:1.2em;font-weight:900;text-shadow:0 0 12px rgba(240,192,48,.4);}
-
-/* ─── WORLD MAP ─── */
+/* SHARED */
+.back-btn{background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.3);color:#f0c030;padding:8px 18px;border-radius:10px;cursor:pointer;font-size:.9em;font-family:inherit;}
+.gold-title{color:#f0c030;font-size:1.2em;font-weight:900;}
+/* MAP */
 #sc-map{background:radial-gradient(ellipse at 50% 0%,#1a3a1a,#0a0a14);justify-content:flex-start;}
-.map-header{width:100%;padding:12px 16px;display:flex;align-items:center;gap:12px;
-  border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
-.map-prog{font-size:.8em;color:#aaa;margin-top:2px;}
+.map-header{width:100%;padding:12px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
 .map-scroll{flex:1;width:100%;overflow-y:auto;padding:12px 14px 24px;}
-.ch-node{display:flex;align-items:center;gap:14px;padding:13px 15px;margin-bottom:9px;
-  background:rgba(240,192,48,.05);border-radius:16px;border:2px solid rgba(240,192,48,.12);
-  cursor:pointer;transition:.2s;}
+.ch-node{display:flex;align-items:center;gap:14px;padding:13px 15px;margin-bottom:9px;background:rgba(240,192,48,.05);border-radius:16px;border:2px solid rgba(240,192,48,.12);cursor:pointer;transition:.2s;}
 .ch-node.locked{opacity:.35;cursor:default;pointer-events:none;}
 .ch-node.done{border-color:rgba(39,174,96,.5);background:rgba(39,174,96,.07);}
-.ch-node.current{border-color:#f0c030;background:rgba(240,192,48,.1);
-  animation:nodePulse .9s ease-in-out infinite alternate;}
+.ch-node.current{border-color:#f0c030;background:rgba(240,192,48,.1);animation:nodePulse .9s ease-in-out infinite alternate;}
 @keyframes nodePulse{from{box-shadow:none}to{box-shadow:0 0 18px rgba(240,192,48,.4)}}
 .ch-ico{font-size:2.2em;min-width:46px;text-align:center;}
-.ch-body{flex:1;}
-.ch-name{font-size:.93em;font-weight:700;}
-.ch-meta{font-size:.73em;color:#aaa;margin-top:2px;}
-.ch-stars{font-size:.85em;color:#f0c030;margin-top:3px;}
-.ch-badge{font-size:1.3em;}
-.world-div{font-size:.7em;color:#f0c030;text-align:center;padding:6px 0 8px;letter-spacing:1px;
-  text-transform:uppercase;opacity:.7;}
-
-/* ─── PRE-GAME ─── */
+.ch-body{flex:1;}.ch-name{font-size:.93em;font-weight:700;}.ch-meta{font-size:.73em;color:#aaa;margin-top:2px;}.ch-stars{font-size:.85em;color:#f0c030;margin-top:3px;}.ch-badge{font-size:1.3em;}
+.world-div{font-size:.7em;color:#f0c030;text-align:center;padding:6px 0 8px;letter-spacing:1px;opacity:.7;}
+/* PRE */
 #sc-pre{background:radial-gradient(ellipse at 50% 0%,#1a2a4a,#0a0a14);justify-content:flex-start;}
-.pre-header{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;
-  border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
+.pre-header{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(240,192,48,.15);background:rgba(0,0,0,.3);}
 .pre-body{flex:1;overflow-y:auto;padding:12px 16px;width:100%;}
-.info-card{background:rgba(240,192,48,.06);border:1px solid rgba(240,192,48,.15);
-  border-radius:14px;padding:13px 15px;margin-bottom:11px;}
+.info-card{background:rgba(240,192,48,.06);border:1px solid rgba(240,192,48,.15);border-radius:14px;padding:13px 15px;margin-bottom:11px;}
 .info-card h3{font-size:.75em;color:#f0c030;margin-bottom:8px;letter-spacing:.5px;}
 .ops-wrap{display:flex;flex-wrap:wrap;gap:8px;}
-.op-tag{padding:5px 14px;background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.35);
-  border-radius:20px;font-size:.82em;color:#f0c030;}
+.op-tag{padding:5px 14px;background:rgba(240,192,48,.12);border:1px solid rgba(240,192,48,.35);border-radius:20px;font-size:.82em;color:#f0c030;}
 .tip-text{font-size:.82em;color:#ccc;line-height:1.7;}
-.start-btn{margin:0 16px 16px;padding:15px;width:calc(100% - 32px);
-  background:linear-gradient(135deg,#c8a215,#f0c030,#c8a215);color:#3d2000;border:none;
-  border-radius:14px;font-size:1.15em;font-weight:900;cursor:pointer;font-family:inherit;
-  box-shadow:0 4px 20px rgba(240,192,48,.4);}
+.start-btn{margin:0 16px 16px;padding:15px;width:calc(100% - 32px);background:linear-gradient(135deg,#c8a215,#f0c030,#c8a215);color:#3d2000;border:none;border-radius:14px;font-size:1.15em;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 4px 20px rgba(240,192,48,.4);}
 .start-btn:active{transform:scale(.97);}
-
-/* ─── GAME ─── */
+/* GAME */
 #sc-game{background:#000;justify-content:flex-start;padding:0;}
 #gCanvas{display:block;width:100%;flex-shrink:0;}
-.game-ui{width:100%;background:rgba(5,3,15,.94);backdrop-filter:blur(6px);
-  padding:7px 10px 10px;flex-shrink:0;border-top:1px solid rgba(240,192,48,.2);}
+.game-ui{width:100%;background:rgba(5,3,15,.94);backdrop-filter:blur(6px);padding:7px 10px 10px;flex-shrink:0;border-top:1px solid rgba(240,192,48,.2);}
 .hud{display:flex;justify-content:space-between;align-items:center;font-size:.82em;margin-bottom:6px;}
-.hud-lives{color:#e74c3c;}
-.hud-wave{color:#f0c030;font-weight:700;}
-.hud-coins{color:#f0c030;font-weight:700;}
+.hud-lives{color:#e74c3c;}.hud-wave{color:#f0c030;font-weight:700;}.hud-coins{color:#f0c030;font-weight:700;}
 .q-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.q-box{flex:1;background:rgba(240,192,48,.08);border:1.5px solid rgba(240,192,48,.3);
-  border-radius:12px;padding:7px 12px;text-align:center;}
+.q-box{flex:1;background:rgba(240,192,48,.08);border:1.5px solid rgba(240,192,48,.3);border-radius:12px;padding:7px 12px;text-align:center;}
 .q-text{font-size:1.3em;font-weight:900;color:#fff;}
-.buy-btn{padding:7px 9px;background:rgba(240,192,48,.12);border:1.5px solid rgba(240,192,48,.35);
-  color:#f0c030;border-radius:10px;font-size:.74em;font-weight:700;cursor:pointer;
-  font-family:inherit;white-space:nowrap;line-height:1.4;text-align:center;min-width:58px;}
+.buy-btn{padding:7px 9px;background:rgba(240,192,48,.12);border:1.5px solid rgba(240,192,48,.35);color:#f0c030;border-radius:10px;font-size:.74em;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;line-height:1.4;text-align:center;min-width:58px;}
 .buy-btn:disabled{opacity:.3;cursor:default;}
 .buy-btn.owned{background:rgba(39,174,96,.2);border-color:rgba(39,174,96,.5);color:#55efc4;}
 .ans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
-.ans-btn{
-  padding:9px 0;background:rgba(240,192,48,.08);border:1.5px solid rgba(240,192,48,.25);
-  color:#fff;border-radius:10px;font-size:.95em;font-weight:700;cursor:pointer;
-  font-family:inherit;transition:.1s;
-}
+.ans-btn{padding:9px 0;background:rgba(240,192,48,.08);border:1.5px solid rgba(240,192,48,.25);color:#fff;border-radius:10px;font-size:.95em;font-weight:700;cursor:pointer;font-family:inherit;transition:.1s;}
 .ans-btn:active{transform:scale(.93);}
 .ans-btn.correct{background:rgba(39,174,96,.55);border-color:#27ae60;}
 .ans-btn.wrong{background:rgba(231,76,60,.5);border-color:#e74c3c;}
-
-/* ─── RESULT ─── */
+/* RESULT */
 #sc-result{background:radial-gradient(ellipse at 50% 30%,#1a3a1a,#0a0a14);}
-.res-icon{font-size:4.5em;margin-bottom:10px;}
-.res-title{font-size:2em;font-weight:900;color:#f0c030;margin-bottom:6px;text-shadow:0 0 20px rgba(240,192,48,.5);}
-.res-stars{font-size:2em;color:#f0c030;margin-bottom:8px;letter-spacing:4px;}
-.res-sub{font-size:.9em;color:#aaa;margin-bottom:24px;}
-.res-btn{padding:13px 26px;border-radius:12px;border:none;font-size:1em;font-weight:700;
-  cursor:pointer;margin:5px;font-family:inherit;}
-.btn-next{background:linear-gradient(135deg,#c8a215,#f0c030);color:#3d2000;}
-.btn-retry{background:rgba(240,192,48,.1);color:#f0c030;border:1.5px solid rgba(240,192,48,.3);}
-.btn-map{background:rgba(255,255,255,.05);color:#aaa;border:1px solid rgba(255,255,255,.12);}
+.res-icon{font-size:4.5em;margin-bottom:10px;}.res-title{font-size:2em;font-weight:900;color:#f0c030;margin-bottom:6px;}.res-stars{font-size:2em;color:#f0c030;margin-bottom:8px;letter-spacing:4px;}.res-sub{font-size:.9em;color:#aaa;margin-bottom:24px;}
+.res-btn{padding:13px 26px;border-radius:12px;border:none;font-size:1em;font-weight:700;cursor:pointer;margin:5px;font-family:inherit;}
+.btn-next{background:linear-gradient(135deg,#c8a215,#f0c030);color:#3d2000;}.btn-retry{background:rgba(240,192,48,.1);color:#f0c030;border:1.5px solid rgba(240,192,48,.3);}.btn-map{background:rgba(255,255,255,.05);color:#aaa;border:1px solid rgba(255,255,255,.12);}
+/* LOADING */
+#sc-loading{background:#0a0a14;}
+.loading-logo{width:min(80vw,300px);height:auto;animation:logoBob 1.5s ease-in-out infinite;margin-bottom:16px;}
+.loading-bar-wrap{width:min(80vw,300px);height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;}
+.loading-bar{height:100%;background:linear-gradient(90deg,#c8a215,#f0c030);border-radius:4px;width:0%;transition:width .3s;}
+.loading-text{font-size:.85em;color:#aaa;margin-top:8px;}
 </style>
 </head>
 <body>
 
-<!-- ═══ TITLE ═══ -->
-<div class="screen active" id="sc-title">
-  <img class="title-logo" src="Math Clash.png" alt="Math Clash"
+<!-- LOADING -->
+<div class="screen active" id="sc-loading">
+  <img class="loading-logo" src="mathclash.png" alt="Math Clash"
+       onerror="this.style.display='none'">
+  <div class="loading-bar-wrap"><div class="loading-bar" id="loading-bar"></div></div>
+  <div class="loading-text" id="loading-text">กำลังโหลด...</div>
+</div>
+
+<!-- TITLE -->
+<div class="screen" id="sc-title">
+  <img class="title-logo" src="mathclash.png" alt="Math Clash"
        onerror="this.style.display='none';document.getElementById('title-fallback').style.display='block'">
   <div id="title-fallback" style="display:none;text-align:center;margin-bottom:12px">
     <div style="font-size:3em">⚔️</div>
-    <div style="font-size:2.2em;font-weight:900;color:#f0c030;text-shadow:0 0 20px rgba(240,192,48,.6)">MATH CLASH</div>
+    <div style="font-size:2.2em;font-weight:900;color:#f0c030">MATH CLASH</div>
     <div style="font-size:1em;color:#e0b030">คิดไม่ลับ ดับมอน</div>
   </div>
   <div class="title-btns">
@@ -160,81 +112,45 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
   </div>
 </div>
 
-<!-- ═══ GRADE SELECT ═══ -->
+<!-- GRADE -->
 <div class="screen" id="sc-grade">
   <div style="text-align:center;margin-bottom:24px">
     <button class="back-btn" style="margin-bottom:12px" onclick="goScreen('sc-title')">← กลับ</button>
     <div class="gold-title">⚔️ เลือกชั้นเรียน</div>
   </div>
   <div class="grade-grid">
-    <button class="grade-btn" onclick="selGrade('p1')">
-      <span class="g-icon">🌱</span>
-      <div class="g-label">ป.1</div><div class="g-topic">บวก – ลบ</div>
-      <div class="g-prog" id="gs-p1"></div>
-    </button>
-    <button class="grade-btn" onclick="selGrade('p4')">
-      <span class="g-icon">🗡️</span>
-      <div class="g-label">ป.4</div><div class="g-topic">คูณ – หาร</div>
-      <div class="g-prog" id="gs-p4"></div>
-    </button>
-    <button class="grade-btn" onclick="selGrade('p5')">
-      <span class="g-icon">🏹</span>
-      <div class="g-label">ป.5</div><div class="g-topic">เศษส่วน</div>
-      <div class="g-prog" id="gs-p5"></div>
-    </button>
-    <button class="grade-btn" onclick="selGrade('p6')">
-      <span class="g-icon">🔮</span>
-      <div class="g-label">ป.6</div><div class="g-topic">ร้อยละ</div>
-      <div class="g-prog" id="gs-p6"></div>
-    </button>
+    <button class="grade-btn" onclick="selGrade('p1')"><span class="g-icon">🌱</span><div class="g-label">ป.1</div><div class="g-topic">บวก – ลบ</div><div class="g-prog" id="gs-p1"></div></button>
+    <button class="grade-btn" onclick="selGrade('p4')"><span class="g-icon">🗡️</span><div class="g-label">ป.4</div><div class="g-topic">คูณ – หาร</div><div class="g-prog" id="gs-p4"></div></button>
+    <button class="grade-btn" onclick="selGrade('p5')"><span class="g-icon">🏹</span><div class="g-label">ป.5</div><div class="g-topic">เศษส่วน</div><div class="g-prog" id="gs-p5"></div></button>
+    <button class="grade-btn" onclick="selGrade('p6')"><span class="g-icon">🔮</span><div class="g-label">ป.6</div><div class="g-topic">ร้อยละ</div><div class="g-prog" id="gs-p6"></div></button>
   </div>
 </div>
 
-<!-- ═══ MAP ═══ -->
+<!-- MAP -->
 <div class="screen" id="sc-map">
   <div class="map-header">
     <button class="back-btn" onclick="goScreen('sc-grade')">← กลับ</button>
-    <div style="flex:1">
-      <div class="gold-title" id="map-title">แผนที่</div>
-      <div class="map-prog" id="map-prog"></div>
-    </div>
+    <div style="flex:1"><div class="gold-title" id="map-title">แผนที่</div><div style="font-size:.8em;color:#aaa;margin-top:2px" id="map-prog"></div></div>
   </div>
   <div class="map-scroll" id="map-nodes"></div>
 </div>
 
-<!-- ═══ PRE-GAME ═══ -->
+<!-- PRE -->
 <div class="screen" id="sc-pre">
   <div class="pre-header">
     <button class="back-btn" onclick="goScreen('sc-map')">← กลับ</button>
     <div style="font-size:2em" id="pre-icon">🌱</div>
-    <div>
-      <div style="font-size:1em;font-weight:900;color:#f0c030" id="pre-name">บทที่ 1</div>
-      <div style="font-size:.78em;color:#aaa" id="pre-world">ป่าเขียว</div>
-    </div>
+    <div><div style="font-size:1em;font-weight:900;color:#f0c030" id="pre-name">บทที่ 1</div><div style="font-size:.78em;color:#aaa" id="pre-world">ป่าเขียว</div></div>
   </div>
   <div class="pre-body">
-    <div class="info-card">
-      <h3>⚗️ เนื้อหาในบทนี้</h3>
-      <div class="ops-wrap" id="pre-ops"></div>
-    </div>
-    <div class="info-card">
-      <h3>📖 วิธีเล่น</h3>
-      <div class="tip-text">
-        🏰 เริ่มต้น 1 ป้อม — ซื้อป้อมที่ 2 ได้ด้วยเหรียญ 30🪙<br>
-        👾 ตอบถูก = ยิงสายฟ้าใส่มอนสเตอร์!<br>
-        ❤️ มอนสเตอร์ผ่านด่าน = เสียหัวใจ 1 ดวง (มี 5)<br>
-        🔥 ตอบถูกติดต่อ 3+ = Streak Bonus เหรียญเพิ่ม!
-      </div>
-    </div>
-    <div class="info-card" id="pre-best-card" style="display:none">
-      <h3>🏆 สถิติดีที่สุด</h3>
-      <div id="pre-best" style="color:#f0c030;font-size:1.1em;letter-spacing:3px;"></div>
-    </div>
+    <div class="info-card"><h3>⚗️ เนื้อหา</h3><div class="ops-wrap" id="pre-ops"></div></div>
+    <div class="info-card"><h3>📖 วิธีเล่น</h3><div class="tip-text">🏰 เริ่มต้น 1 ป้อม — ซื้อป้อมที่ 2 ด้วย 30🪙<br>👾 ตอบถูก = ยิงสายฟ้าใส่มอนสเตอร์!<br>❤️ มอนผ่านด่าน = เสียหัวใจ (มี 5 ดวง)<br>🔥 ตอบถูกติดต่อ 3+ = Streak Bonus!</div></div>
+    <div class="info-card" id="pre-best-card" style="display:none"><h3>🏆 สถิติ</h3><div id="pre-best" style="color:#f0c030;font-size:1.1em;letter-spacing:3px;"></div></div>
   </div>
   <button class="start-btn" onclick="startChapter()">⚔️ ดับมอน!</button>
 </div>
 
-<!-- ═══ GAME ═══ -->
+<!-- GAME -->
 <div class="screen" id="sc-game">
   <canvas id="gCanvas"></canvas>
   <div class="game-ui">
@@ -251,23 +167,67 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
   </div>
 </div>
 
-<!-- ═══ RESULT ═══ -->
+<!-- RESULT -->
 <div class="screen" id="sc-result">
   <div class="res-icon" id="res-icon">🏆</div>
-  <div class="res-title" id="res-title">ผ่านด่านแล้ว!</div>
+  <div class="res-title" id="res-title">ดับมอนสำเร็จ!</div>
   <div class="res-stars" id="res-stars"></div>
   <div class="res-sub" id="res-sub"></div>
   <div>
     <button class="res-btn btn-retry" onclick="startChapter()">🔄 เล่นใหม่</button>
     <button class="res-btn btn-next" id="res-next" onclick="nextChapter()">▶ บทถัดไป</button>
-  </div>
-  <br>
+  </div><br>
   <button class="res-btn btn-map" onclick="renderMap();goScreen('sc-map')">🗺️ กลับแผนที่</button>
 </div>
 
 <script>
 // ══════════════════════════════════════════
-// CURRICULUM (same as before)
+// IMAGE ASSETS
+// ══════════════════════════════════════════
+const IMG_SRCS = {
+  bg_forest:  'assest/bg_forest.png.png',
+  bg_castle:  'assest/bg_castle.png.png',
+  bg_cave:    'assest/bg_cave.png.png',
+  tw_castle:  'assest/tower_castle.png.png',
+  tw_magic:   'assest/tower_magic.png.png',
+  proj:       'assest/projectile.png.png',
+  coin:       'assest/coin.png.png',
+  mn_purple:  'assest/monster_normal_purple.png',
+  mn_orange:  'assest/monster_normal_orange.png',
+  mn_red:     'assest/monster_normal_red.png',
+  mn_green:   'assest/monster_normal_green.png',
+  mn_blue:    'assest/monster_normal_blue.png',
+  mt_darkgreen:'assest/monster_tank_darkgreen.png',
+  mt_navy:    'assest/monster_tank_navy.png',
+  mb_red:     'assest/monster_boss_red.png',
+  mb_darkpurple:'assest/monster_boss_darkpurple.png',
+};
+const IMGS = {};
+const NM_KEYS = ['mn_purple','mn_orange','mn_red','mn_green','mn_blue'];
+const TK_KEYS = ['mt_darkgreen','mt_navy'];
+const BS_KEYS = ['mb_red','mb_darkpurple'];
+
+function preloadImages(onDone){
+  const keys = Object.keys(IMG_SRCS);
+  let done = 0;
+  const bar = document.getElementById('loading-bar');
+  const txt = document.getElementById('loading-text');
+  keys.forEach(k => {
+    const img = new Image();
+    img.onload = () => { IMGS[k] = img; tick(); };
+    img.onerror= () => { IMGS[k] = null;  tick(); };
+    img.src = IMG_SRCS[k];
+  });
+  function tick(){
+    done++;
+    if(bar) bar.style.width = (done/keys.length*100)+'%';
+    if(txt) txt.textContent = `โหลด ${done}/${keys.length}...`;
+    if(done >= keys.length) setTimeout(onDone, 200);
+  }
+}
+
+// ══════════════════════════════════════════
+// CURRICULUM
 // ══════════════════════════════════════════
 const CHAPTERS={
   p1:[
@@ -300,106 +260,56 @@ const CHAPTERS={
     {id:'p6c6',name:'คิดเลขเร็ว',icon:'💀',world:'ถ้ำมืดสนิท',wk:'cave',ops:['+','-','x','d'],min:1,max:100,waves:5},
   ],
 };
-const OP_LBL={'+':'บวก','-':'ลบ','x':'คูณ','d':'หาร','+f':'บวกเศษส่วน','-f':'ลบเศษส่วน',
-  'xf':'คูณเศษส่วน','df':'หารเศษส่วน','+d':'บวกทศนิยม','-d':'ลบทศนิยม',
-  'xd':'คูณทศนิยม','dd':'หารทศนิยม','pct':'ร้อยละ','ratio':'อัตราส่วน','area':'พื้นที่'};
-
-// World themes for canvas background
+const OP_LBL={'+':'บวก','-':'ลบ','x':'คูณ','d':'หาร','+f':'บวกเศษส่วน','-f':'ลบเศษส่วน','xf':'คูณเศษส่วน','df':'หารเศษส่วน','+d':'บวกทศนิยม','-d':'ลบทศนิยม','xd':'คูณทศนิยม','dd':'หารทศนิยม','pct':'ร้อยละ','ratio':'อัตราส่วน','area':'พื้นที่'};
 const THEMES={
-  forest:{
-    sky0:'#87CEEB',sky1:'#4a9f6e',ground:'#2d6a1f',
-    path:'#c8a060',pathDark:'rgba(0,0,0,.3)',
-    treeColor:'#1a5c1a',name:'🌲 โลกป่า',
-    bgStars:false,
-  },
-  castle:{
-    sky0:'#2c3e7a',sky1:'#1a2455',ground:'#3d3d60',
-    path:'#808080',pathDark:'rgba(0,0,0,.4)',
-    treeColor:'#4a3a6a',name:'🏰 โลกปราสาท',
-    bgStars:true,
-  },
-  cave:{
-    sky0:'#1a0a00',sky1:'#0a0500',ground:'#1a0800',
-    path:'#3a3a3a',pathDark:'rgba(0,0,0,.7)',
-    treeColor:'#2a1500',name:'🌑 โลกถ้ำ',
-    bgStars:false,
-  },
+  forest:{sky0:'#87CEEB',sky1:'#4a9f6e',ground:'#2d6a1f',path:'#c8a060',pathDark:'rgba(0,0,0,.3)',name:'🌲 โลกป่า'},
+  castle:{sky0:'#2c3e7a',sky1:'#1a2455',ground:'#3d3d60',path:'#808080',pathDark:'rgba(0,0,0,.4)',name:'🏰 โลกปราสาท'},
+  cave:  {sky0:'#1a0a00',sky1:'#0a0500',ground:'#1a0800',path:'#3a3a3a',pathDark:'rgba(0,0,0,.7)',name:'🌑 โลกถ้ำ'},
 };
-
-// Monster colors by number/type
-const MONSTER_COLORS=[
-  '#9b59b6','#3498db','#27ae60','#e67e22',
-  '#e74c3c','#1abc9c','#e91e63','#5c6bc0','#f39c12','#8bc34a',
-];
 
 // ══════════════════════════════════════════
 // SAVE / NAV
 // ══════════════════════════════════════════
-let saveData={}, curGrade=null, curChIdx=0;
-
-function loadSave(){
-  try{saveData=JSON.parse(localStorage.getItem('mc_save')||'{}');}catch(e){saveData={};}
-  ['p1','p4','p5','p6'].forEach(g=>{ if(!saveData[g]) saveData[g]={chapter:0,stars:{}}; });
-  refreshGradeStars();
-}
-function writeSave(){ localStorage.setItem('mc_save',JSON.stringify(saveData)); }
-function refreshGradeStars(){
-  ['p1','p4','p5','p6'].forEach(g=>{
-    const done=saveData[g].chapter, total=CHAPTERS[g].length;
-    const el=document.getElementById('gs-'+g); if(!el) return;
-    el.textContent=done===0?'ยังไม่เริ่ม':`ผ่าน ${done}/${total} บท`;
-  });
-}
-function goScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-function selGrade(g){ curGrade=g; loadSave(); renderMap(); goScreen('sc-map'); }
+let saveData={},curGrade=null,curChIdx=0;
+function loadSave(){try{saveData=JSON.parse(localStorage.getItem('mc_save')||'{}');}catch(e){saveData={};}['p1','p4','p5','p6'].forEach(g=>{if(!saveData[g])saveData[g]={chapter:0,stars:{}};});refreshGradeStars();}
+function writeSave(){localStorage.setItem('mc_save',JSON.stringify(saveData));}
+function refreshGradeStars(){['p1','p4','p5','p6'].forEach(g=>{const d=saveData[g].chapter,t=CHAPTERS[g].length,el=document.getElementById('gs-'+g);if(el)el.textContent=d===0?'ยังไม่เริ่ม':`ผ่าน ${d}/${t} บท`;});}
+function goScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function selGrade(g){curGrade=g;loadSave();renderMap();goScreen('sc-map');}
 
 function renderMap(){
-  const chs=CHAPTERS[curGrade], gd=saveData[curGrade];
+  const chs=CHAPTERS[curGrade],gd=saveData[curGrade];
   const labels={p1:'ป.1 – คณิตเบื้องต้น',p4:'ป.4 – คูณ หาร',p5:'ป.5 – เศษส่วน',p6:'ป.6 – ร้อยละ'};
   document.getElementById('map-title').textContent=labels[curGrade];
   document.getElementById('map-prog').textContent=`ผ่านแล้ว ${gd.chapter}/${chs.length} บท`;
-  const cont=document.getElementById('map-nodes'); cont.innerHTML='';
+  const cont=document.getElementById('map-nodes');cont.innerHTML='';
   let lastWk='';
   chs.forEach((ch,i)=>{
-    if(ch.wk!==lastWk){ lastWk=ch.wk;
-      const d=document.createElement('div'); d.className='world-div';
-      d.textContent=THEMES[ch.wk].name; cont.appendChild(d); }
-    const done=i<gd.chapter, current=i===gd.chapter, locked=i>gd.chapter;
+    if(ch.wk!==lastWk){lastWk=ch.wk;const d=document.createElement('div');d.className='world-div';d.textContent=THEMES[ch.wk].name;cont.appendChild(d);}
+    const done=i<gd.chapter,current=i===gd.chapter,locked=i>gd.chapter;
     const stars=gd.stars[ch.id]||0;
     const div=document.createElement('div');
     div.className='ch-node'+(done?' done':current?' current':locked?' locked':'');
-    div.innerHTML=`<div class="ch-ico">${ch.icon}</div>
-      <div class="ch-body">
-        <div class="ch-name">บทที่ ${i+1}: ${ch.name}</div>
-        <div class="ch-meta">${ch.world} · ${ch.ops.map(o=>OP_LBL[o]||o).join(', ')}</div>
-        ${done?`<div class="ch-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div>`:''}
-      </div>
-      <div class="ch-badge">${locked?'🔒':done?'✅':current?'▶':''}</div>`;
-    if(!locked) div.onclick=()=>openChapter(i);
+    div.innerHTML=`<div class="ch-ico">${ch.icon}</div><div class="ch-body"><div class="ch-name">บทที่ ${i+1}: ${ch.name}</div><div class="ch-meta">${ch.world} · ${ch.ops.map(o=>OP_LBL[o]||o).join(', ')}</div>${done?`<div class="ch-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div>`:''}</div><div class="ch-badge">${locked?'🔒':done?'✅':current?'▶':''}</div>`;
+    if(!locked)div.onclick=()=>openChapter(i);
     cont.appendChild(div);
   });
 }
-
 function openChapter(idx){
-  curChIdx=idx;
-  const ch=CHAPTERS[curGrade][idx];
+  curChIdx=idx;const ch=CHAPTERS[curGrade][idx];
   document.getElementById('pre-icon').textContent=ch.icon;
   document.getElementById('pre-name').textContent=`บทที่ ${idx+1}: ${ch.name}`;
   document.getElementById('pre-world').textContent=ch.world;
-  const od=document.getElementById('pre-ops'); od.innerHTML='';
-  ch.ops.forEach(op=>{ const t=document.createElement('span'); t.className='op-tag'; t.textContent=OP_LBL[op]||op; od.appendChild(t); });
+  const od=document.getElementById('pre-ops');od.innerHTML='';
+  ch.ops.forEach(op=>{const t=document.createElement('span');t.className='op-tag';t.textContent=OP_LBL[op]||op;od.appendChild(t);});
   const stars=saveData[curGrade].stars[ch.id]||0;
   const bc=document.getElementById('pre-best-card');
-  if(stars>0){ bc.style.display=''; document.getElementById('pre-best').textContent='★'.repeat(stars)+'☆'.repeat(3-stars); }
-  else bc.style.display='none';
+  if(stars>0){bc.style.display='';document.getElementById('pre-best').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);}else bc.style.display='none';
   goScreen('sc-pre');
 }
 
 // ══════════════════════════════════════════
-// QUESTION ENGINE
+// QUESTIONS
 // ══════════════════════════════════════════
 function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
 function gcd(a,b){return b===0?a:gcd(b,a%b);}
@@ -407,502 +317,285 @@ function genQ(ch){
   const op=ch.ops[Math.floor(Math.random()*ch.ops.length)];
   let a,b,c,d,n,dn,g;
   switch(op){
-    case '+': a=ri(ch.min,ch.max);b=ri(ch.min,ch.max); return {text:`${a} + ${b} = ?`,ans:a+b};
-    case '-': a=ri(ch.min,ch.max);b=ri(ch.min,a); return {text:`${a} - ${b} = ?`,ans:a-b};
-    case 'x': a=ri(1,Math.min(ch.max,12));b=ri(1,Math.min(ch.max,12)); return {text:`${a} × ${b} = ?`,ans:a*b};
-    case 'd': b=ri(1,Math.min(ch.max,12));a=b*ri(1,Math.min(ch.max,12)); return {text:`${a} ÷ ${b} = ?`,ans:a/b};
-    case '+f': d=ri(2,ch.max);a=ri(1,d-1);b=ri(1,d-a); return {text:`${a}/${d} + ${b}/${d} = ?`,ans:a+b};
-    case '-f': d=ri(2,ch.max);a=ri(2,d-1);b=ri(1,a-1); return {text:`${a}/${d} - ${b}/${d} = ?`,ans:a-b};
-    case 'xf': a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);
-      n=a*c;dn=b*d;g=gcd(n,dn); return {text:`${a}/${b} × ${c}/${d} = ?`,ans:n/g};
-    case 'df': a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);
-      n=a*d;dn=b*c;g=gcd(n,dn); return {text:`${a}/${b} ÷ ${c}/${d} = ?`,ans:n/g};
-    case '+d': a=ri(ch.min,ch.max);b=ri(ch.min,ch.max); return {text:`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,ans:Math.round(a+b)/10};
-    case '-d': a=ri(ch.min,ch.max);b=ri(ch.min,a); return {text:`${(a/10).toFixed(1)} - ${(b/10).toFixed(1)} = ?`,ans:Math.round(a-b)/10};
-    case 'xd': a=ri(1,9);b=ri(ch.min,ch.max); return {text:`${a} × ${(b/10).toFixed(1)} = ?`,ans:Math.round(a*b)/10};
-    case 'dd': b=ri(1,9);a=b*ri(1,10); return {text:`${(a/10).toFixed(1)} ÷ ${b} = ?`,ans:Math.round(a/b)/10};
-    case 'pct': {const p=ri(1,9)*10,base=ri(1,Math.floor(ch.max/10))*10; return {text:`${p}% ของ ${base} = ?`,ans:p*base/100};}
-    case 'ratio': {a=ri(1,ch.max);b=ri(1,ch.max);c=ri(2,5); return {text:`${a}:${b} = ?:${b*c}`,ans:a*c};}
-    case 'area': {a=ri(ch.min,ch.max);b=ri(ch.min,ch.max); return {text:`กว้าง ${a} × ยาว ${b} = ?`,ans:a*b};}
-    default: return {text:`1+1=?`,ans:2};
+    case '+':a=ri(ch.min,ch.max);b=ri(ch.min,ch.max);return{text:`${a} + ${b} = ?`,ans:a+b};
+    case '-':a=ri(ch.min,ch.max);b=ri(ch.min,a);return{text:`${a} - ${b} = ?`,ans:a-b};
+    case 'x':a=ri(1,Math.min(ch.max,12));b=ri(1,Math.min(ch.max,12));return{text:`${a} × ${b} = ?`,ans:a*b};
+    case 'd':b=ri(1,Math.min(ch.max,12));a=b*ri(1,Math.min(ch.max,12));return{text:`${a} ÷ ${b} = ?`,ans:a/b};
+    case '+f':d=ri(2,ch.max);a=ri(1,d-1);b=ri(1,d-a);return{text:`${a}/${d} + ${b}/${d} = ?`,ans:a+b};
+    case '-f':d=ri(2,ch.max);a=ri(2,d-1);b=ri(1,a-1);return{text:`${a}/${d} - ${b}/${d} = ?`,ans:a-b};
+    case 'xf':a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);n=a*c;dn=b*d;g=gcd(n,dn);return{text:`${a}/${b} × ${c}/${d} = ?`,ans:n/g};
+    case 'df':a=ri(1,ch.max);b=ri(1,ch.max);c=ri(1,ch.max);d=ri(1,ch.max);n=a*d;dn=b*c;g=gcd(n,dn);return{text:`${a}/${b} ÷ ${c}/${d} = ?`,ans:n/g};
+    case '+d':a=ri(ch.min,ch.max);b=ri(ch.min,ch.max);return{text:`${(a/10).toFixed(1)} + ${(b/10).toFixed(1)} = ?`,ans:Math.round(a+b)/10};
+    case '-d':a=ri(ch.min,ch.max);b=ri(ch.min,a);return{text:`${(a/10).toFixed(1)} - ${(b/10).toFixed(1)} = ?`,ans:Math.round(a-b)/10};
+    case 'xd':a=ri(1,9);b=ri(ch.min,ch.max);return{text:`${a} × ${(b/10).toFixed(1)} = ?`,ans:Math.round(a*b)/10};
+    case 'dd':b=ri(1,9);a=b*ri(1,10);return{text:`${(a/10).toFixed(1)} ÷ ${b} = ?`,ans:Math.round(a/b)/10};
+    case 'pct':{const p=ri(1,9)*10,base=ri(1,Math.floor(ch.max/10))*10;return{text:`${p}% ของ ${base} = ?`,ans:p*base/100};}
+    case 'ratio':{a=ri(1,ch.max);b=ri(1,ch.max);c=ri(2,5);return{text:`${a}:${b} = ?:${b*c}`,ans:a*c};}
+    case 'area':{a=ri(ch.min,ch.max);b=ri(ch.min,ch.max);return{text:`กว้าง ${a} × ยาว ${b} = ?`,ans:a*b};}
+    default:return{text:`1+1=?`,ans:2};
   }
 }
-function genChoices(ans){
-  const s=new Set([ans]);
-  const dl=[1,2,3,4,5,6,7,8,10,12,15];
-  let tries=0;
-  while(s.size<4&&tries<60){
-    tries++;
-    const d=dl[Math.floor(Math.random()*dl.length)]*(Math.random()<.5?1:-1);
-    const c=Math.round((ans+d)*10)/10;
-    if(c>=0) s.add(c);
-  }
-  return [...s].sort(()=>Math.random()-.5);
-}
+function genChoices(ans){const s=new Set([ans]);const dl=[1,2,3,4,5,6,7,8,10,12,15];let t=0;while(s.size<4&&t<60){t++;const d=dl[Math.floor(Math.random()*dl.length)]*(Math.random()<.5?1:-1);const c=Math.round((ans+d)*10)/10;if(c>=0)s.add(c);}return[...s].sort(()=>Math.random()-.5);}
 
 // ══════════════════════════════════════════
 // GAME STATE
 // ══════════════════════════════════════════
-const LIVES_MAX=5, TOWER_COST=30;
-let GS=null, animID=null;
+const LIVES_MAX=5,TOWER_COST=30;
+let GS=null,animID=null;
 
 function startChapter(){
   if(animID){cancelAnimationFrame(animID);animID=null;}
   const ch=CHAPTERS[curGrade][curChIdx];
-  GS={
-    ch, theme:THEMES[ch.wk],
-    lives:LIVES_MAX, coins:0, streak:0, wave:0,
-    enemies:[], projectiles:[], particles:[],
-    spawnTimer:-90, spawnInterval:100, spawnCount:0, spawnMax:0,
-    curQ:null, qAnswered:false,
-    towers:[], tower2Active:false,
-    WP:[], SLOTS:[], canW:0, canH:0, tick:0, phase:'playing',
-  };
+  GS={ch,theme:THEMES[ch.wk],lives:LIVES_MAX,coins:0,streak:0,wave:0,enemies:[],projectiles:[],particles:[],spawnTimer:-90,spawnInterval:100,spawnCount:0,spawnMax:0,curQ:null,qAnswered:false,towers:[],tower2Active:false,WP:[],SLOTS:[],canW:0,canH:0,tick:0,phase:'playing'};
   setupCanvas();
   GS.towers=[{x:GS.SLOTS[0].x,y:GS.SLOTS[0].y,lv:1}];
-  updateHUD(); updateBuyBtn(); beginWave(); newQuestion();
+  updateHUD();updateBuyBtn();beginWave();newQuestion();
   goScreen('sc-game');
   animID=requestAnimationFrame(gameLoop);
 }
-
 function setupCanvas(){
   const cv=document.getElementById('gCanvas');
-  const uiEl=document.querySelector('.game-ui');
-  const uiH=uiEl?uiEl.offsetHeight||185:185;
-  const W=window.innerWidth, H=window.innerHeight-uiH;
-  cv.width=W; cv.height=H; cv.style.height=H+'px';
-  GS.canW=W; GS.canH=H;
+  const uiH=document.querySelector('.game-ui').offsetHeight||185;
+  const W=window.innerWidth,H=window.innerHeight-uiH;
+  cv.width=W;cv.height=H;cv.style.height=H+'px';
+  GS.canW=W;GS.canH=H;
   GS.WP=[{x:W+60,y:H*.22},{x:W*.72,y:H*.22},{x:W*.28,y:H*.76},{x:-70,y:H*.76}];
   GS.SLOTS=[{x:W*.82,y:H*.58},{x:W*.18,y:H*.40}];
 }
-
-function beginWave(){
-  GS.spawnCount=0;
-  GS.spawnMax=4+GS.wave*2;
-  GS.spawnTimer=-80;
-  GS.spawnInterval=Math.max(50,105-GS.wave*10);
-  updateHUD();
-}
-
+function beginWave(){GS.spawnCount=0;GS.spawnMax=4+GS.wave*2;GS.spawnTimer=-80;GS.spawnInterval=Math.max(50,105-GS.wave*10);updateHUD();}
 function spawnEnemy(){
   const isBoss=GS.wave===GS.ch.waves-1&&GS.spawnCount===GS.spawnMax-1;
   const isHeavy=GS.spawnCount%4===3;
   const spd=0.65+GS.wave*0.15;
   const hp=isBoss?12+GS.wave*4:isHeavy?4+GS.wave:2+Math.floor(GS.wave*.7);
-  // Pick a number for this monster's face (from 0-9)
-  const num=Math.floor(Math.random()*10);
-  GS.enemies.push({
-    x:GS.WP[0].x,y:GS.WP[0].y,wpIdx:1,
-    hp,maxHp:hp,
-    speed:spd*(isBoss?.42:isHeavy?.68:1),
-    type:isBoss?'boss':isHeavy?'tank':'normal',
-    num,color:MONSTER_COLORS[num],
-    dead:false,
-  });
+  const keys=isBoss?BS_KEYS:isHeavy?TK_KEYS:NM_KEYS;
+  const imgKey=keys[Math.floor(Math.random()*keys.length)];
+  const num=ri(0,9);
+  GS.enemies.push({x:GS.WP[0].x,y:GS.WP[0].y,wpIdx:1,hp,maxHp:hp,speed:spd*(isBoss?.42:isHeavy?.68:1),type:isBoss?'boss':isHeavy?'tank':'normal',imgKey,num,dead:false});
   GS.spawnCount++;
 }
 
 // ══════════════════════════════════════════
-// QUESTION + TOWER UI
+// QUESTION UI
 // ══════════════════════════════════════════
 function newQuestion(){
-  const q=genQ(GS.ch);
-  GS.curQ={...q,choices:genChoices(q.ans)};
-  GS.qAnswered=false;
+  const q=genQ(GS.ch);GS.curQ={...q,choices:genChoices(q.ans)};GS.qAnswered=false;
   document.getElementById('q-text').textContent=q.text;
-  const grid=document.getElementById('ans-grid'); grid.innerHTML='';
-  GS.curQ.choices.forEach(c=>{
-    const btn=document.createElement('button'); btn.className='ans-btn'; btn.textContent=c;
-    btn.onclick=()=>answerQ(c,btn); grid.appendChild(btn);
-  });
+  const grid=document.getElementById('ans-grid');grid.innerHTML='';
+  GS.curQ.choices.forEach(c=>{const btn=document.createElement('button');btn.className='ans-btn';btn.textContent=c;btn.onclick=()=>answerQ(c,btn);grid.appendChild(btn);});
 }
-
 function answerQ(val,btn){
-  if(GS.qAnswered||GS.phase!=='playing') return;
+  if(GS.qAnswered||GS.phase!=='playing')return;
   GS.qAnswered=true;
   const ok=Math.abs(val-GS.curQ.ans)<0.01;
-  if(ok){
-    btn.classList.add('correct');
-    GS.streak++; GS.coins+=GS.streak>=3?10:5;
-    if(GS.streak>=3) addParticle(GS.canW/2,GS.canH*.25,'🔥 +10',22);
-    fireAllTowers(); updateHUD(); updateBuyBtn();
-    setTimeout(()=>{ if(GS.phase==='playing') newQuestion(); },480);
-  } else {
-    btn.classList.add('wrong'); GS.streak=0;
-    document.querySelectorAll('.ans-btn').forEach(b=>{
-      if(Math.abs(+b.textContent-GS.curQ.ans)<0.01) b.classList.add('correct');
-    });
-    updateHUD();
-    setTimeout(()=>{ if(GS.phase==='playing') newQuestion(); },1100);
-  }
+  if(ok){btn.classList.add('correct');GS.streak++;GS.coins+=GS.streak>=3?10:5;if(GS.streak>=3)addParticle(GS.canW/2,GS.canH*.25,'🔥 +10',22);fireAllTowers();updateHUD();updateBuyBtn();setTimeout(()=>{if(GS.phase==='playing')newQuestion();},480);}
+  else{btn.classList.add('wrong');GS.streak=0;document.querySelectorAll('.ans-btn').forEach(b=>{if(Math.abs(+b.textContent-GS.curQ.ans)<0.01)b.classList.add('correct');});updateHUD();setTimeout(()=>{if(GS.phase==='playing')newQuestion();},1100);}
 }
-
 function fireAllTowers(){
-  const alive=GS.enemies.filter(e=>!e.dead);
-  if(!alive.length) return;
+  const alive=GS.enemies.filter(e=>!e.dead);if(!alive.length)return;
   const target=alive.reduce((b,e)=>e.wpIdx>b.wpIdx||(e.wpIdx===b.wpIdx&&e.x<b.x)?e:b,alive[0]);
-  GS.towers.forEach(tw=>{
-    GS.projectiles.push({x:tw.x,y:tw.y,target,spd:11,dmg:3+tw.lv,hit:false});
-  });
+  GS.towers.forEach(tw=>{GS.projectiles.push({x:tw.x,y:tw.y,target,spd:11,dmg:3+tw.lv,hit:false});});
 }
-
 function buyTower(){
-  if(GS.tower2Active||GS.coins<TOWER_COST) return;
-  GS.coins-=TOWER_COST; GS.tower2Active=true;
-  GS.towers.push({x:GS.SLOTS[1].x,y:GS.SLOTS[1].y,lv:1});
-  updateHUD(); updateBuyBtn();
-  addParticle(GS.SLOTS[1].x,GS.SLOTS[1].y,'🏰 ซื้อแล้ว!',18);
+  if(GS.tower2Active||GS.coins<TOWER_COST)return;
+  GS.coins-=TOWER_COST;GS.tower2Active=true;GS.towers.push({x:GS.SLOTS[1].x,y:GS.SLOTS[1].y,lv:1});
+  updateHUD();updateBuyBtn();addParticle(GS.SLOTS[1].x,GS.SLOTS[1].y,'🏰 ซื้อแล้ว!',18);
 }
-
-function updateBuyBtn(){
-  if(!GS) return;
-  const btn=document.getElementById('buy-btn');
-  if(GS.tower2Active){ btn.innerHTML='✅ 2<br>ป้อม'; btn.classList.add('owned'); btn.disabled=true; return; }
-  btn.classList.remove('owned'); btn.disabled=GS.coins<TOWER_COST;
-  btn.innerHTML=`🏰<br>${TOWER_COST}🪙`;
-}
-
-function addParticle(x,y,text,size){
-  GS.particles.push({x,y,text,size:size||16,life:80,maxLife:80});
-}
-
-function updateHUD(){
-  if(!GS) return;
-  document.getElementById('hud-lives').textContent='❤️'.repeat(GS.lives)+'🖤'.repeat(LIVES_MAX-GS.lives);
-  document.getElementById('hud-coins').textContent='🪙 '+GS.coins+(GS.streak>=3?' 🔥×'+GS.streak:'');
-  document.getElementById('hud-wave').textContent=`⚔️ คลื่น ${Math.min(GS.wave+1,GS.ch.waves)}/${GS.ch.waves}`;
-}
+function updateBuyBtn(){if(!GS)return;const btn=document.getElementById('buy-btn');if(GS.tower2Active){btn.innerHTML='✅ 2<br>ป้อม';btn.classList.add('owned');btn.disabled=true;return;}btn.classList.remove('owned');btn.disabled=GS.coins<TOWER_COST;btn.innerHTML=`🏰<br>${TOWER_COST}🪙`;}
+function addParticle(x,y,text,size){GS.particles.push({x,y,text,size:size||16,life:80,maxLife:80});}
+function updateHUD(){if(!GS)return;document.getElementById('hud-lives').textContent='❤️'.repeat(GS.lives)+'🖤'.repeat(LIVES_MAX-GS.lives);document.getElementById('hud-coins').textContent='🪙 '+GS.coins+(GS.streak>=3?' 🔥×'+GS.streak:'');document.getElementById('hud-wave').textContent=`⚔️ คลื่น ${Math.min(GS.wave+1,GS.ch.waves)}/${GS.ch.waves}`;}
 
 // ══════════════════════════════════════════
 // GAME LOOP
 // ══════════════════════════════════════════
 function gameLoop(){
-  if(!GS||GS.phase==='idle') return;
+  if(!GS||GS.phase==='idle')return;
   GS.tick++;
   const cv=document.getElementById('gCanvas');
   const ctx=cv.getContext('2d');
-
-  if(GS.spawnCount<GS.spawnMax&&GS.phase==='playing'){
-    GS.spawnTimer++;
-    if(GS.spawnTimer>=GS.spawnInterval){ spawnEnemy(); GS.spawnTimer=0; }
-  }
+  if(GS.spawnCount<GS.spawnMax&&GS.phase==='playing'){GS.spawnTimer++;if(GS.spawnTimer>=GS.spawnInterval){spawnEnemy();GS.spawnTimer=0;}}
   for(const e of GS.enemies){
-    if(e.dead||e.wpIdx>=GS.WP.length) continue;
-    const wp=GS.WP[e.wpIdx];
-    const dx=wp.x-e.x,dy=wp.y-e.y,dist=Math.hypot(dx,dy);
-    if(dist<e.speed+2){ e.x=wp.x;e.y=wp.y;e.wpIdx++;
-      if(e.wpIdx>=GS.WP.length){ e.dead=true;GS.lives--;if(GS.lives<=0){endGame(false);return;}updateHUD(); }
-    } else { e.x+=dx/dist*e.speed; e.y+=dy/dist*e.speed; }
+    if(e.dead||e.wpIdx>=GS.WP.length)continue;
+    const wp=GS.WP[e.wpIdx];const dx=wp.x-e.x,dy=wp.y-e.y,dist=Math.hypot(dx,dy);
+    if(dist<e.speed+2){e.x=wp.x;e.y=wp.y;e.wpIdx++;if(e.wpIdx>=GS.WP.length){e.dead=true;GS.lives--;if(GS.lives<=0){endGame(false);return;}updateHUD();}}
+    else{e.x+=dx/dist*e.speed;e.y+=dy/dist*e.speed;}
   }
   for(const p of GS.projectiles){
-    if(p.hit) continue;
-    const t=p.target; if(t.dead){p.hit=true;continue;}
+    if(p.hit)continue;const t=p.target;if(t.dead){p.hit=true;continue;}
     const dx=t.x-p.x,dy=t.y-p.y,dist=Math.hypot(dx,dy);
-    if(dist<p.spd+8){ p.hit=true; t.hp-=p.dmg;
-      if(t.hp<=0){ t.dead=true; GS.coins+=t.type==='boss'?20:t.type==='tank'?8:4; updateHUD(); updateBuyBtn(); }
-    } else { p.x+=dx/dist*p.spd; p.y+=dy/dist*p.spd; }
+    if(dist<p.spd+8){p.hit=true;t.hp-=p.dmg;if(t.hp<=0){t.dead=true;GS.coins+=t.type==='boss'?20:t.type==='tank'?8:4;updateHUD();updateBuyBtn();}}
+    else{p.x+=dx/dist*p.spd;p.y+=dy/dist*p.spd;}
   }
-  GS.particles.forEach(p=>{ p.life--; p.y-=0.7; });
+  GS.particles.forEach(p=>{p.life--;p.y-=0.7;});
   GS.enemies=GS.enemies.filter(e=>!e.dead);
   GS.projectiles=GS.projectiles.filter(p=>!p.hit);
   GS.particles=GS.particles.filter(p=>p.life>0);
-
-  if(GS.spawnCount>=GS.spawnMax&&GS.enemies.length===0&&GS.phase==='playing'){
-    GS.wave++;
-    if(GS.wave>=GS.ch.waves){ endGame(true); return; }
-    beginWave();
-  }
-
+  if(GS.spawnCount>=GS.spawnMax&&GS.enemies.length===0&&GS.phase==='playing'){GS.wave++;if(GS.wave>=GS.ch.waves){endGame(true);return;}beginWave();}
   draw(ctx,GS.canW,GS.canH);
   animID=requestAnimationFrame(gameLoop);
 }
 
 // ══════════════════════════════════════════
-// DRAWING — FANTASY STYLE
+// DRAWING — IMAGE-BASED
 // ══════════════════════════════════════════
 function draw(ctx,W,H){
   const t=GS.theme;
-  // Sky gradient
-  const sky=ctx.createLinearGradient(0,0,0,H*.7);
-  sky.addColorStop(0,t.sky0); sky.addColorStop(1,t.sky1);
-  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
-  // Ground
-  ctx.fillStyle=t.ground; ctx.fillRect(0,H*.65,W,H*.35);
+  // ── BACKGROUND IMAGE ──
+  const bgKey={'forest':'bg_forest','castle':'bg_castle','cave':'bg_cave'}[GS.ch.wk];
+  const bgImg=IMGS[bgKey];
+  if(bgImg){
+    ctx.drawImage(bgImg,0,0,W,H);
+  } else {
+    // fallback gradient
+    const sky=ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,t.sky0);sky.addColorStop(1,t.sky1);
+    ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=t.ground;ctx.fillRect(0,H*.65,W,H*.35);
+  }
+  // slight dark overlay for readability
+  ctx.fillStyle='rgba(0,0,0,.18)';ctx.fillRect(0,0,W,H);
 
-  drawBg(ctx,W,H);
   drawPath(ctx,W,H);
   drawSlot2Ghost(ctx);
   GS.towers.forEach((tw,i)=>drawTower(ctx,tw,i));
   GS.enemies.forEach(e=>drawMonster(ctx,e));
-  // Projectiles — lightning bolt style
+
+  // Projectiles
   GS.projectiles.forEach(p=>{
-    if(p.hit) return;
-    ctx.save();
-    ctx.strokeStyle='#f0c030'; ctx.lineWidth=3; ctx.shadowBlur=8; ctx.shadowColor='#f0c030';
-    ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p.target.x,p.target.y); ctx.stroke();
-    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2); ctx.fill();
-    ctx.restore();
+    if(p.hit)return;
+    const pi=IMGS.proj;
+    if(pi){
+      const ps=18;ctx.save();
+      const angle=Math.atan2(p.target.y-p.y,p.target.x-p.x);
+      ctx.translate(p.x,p.y);ctx.rotate(angle);
+      ctx.drawImage(pi,-ps/2,-ps/2,ps,ps);
+      ctx.restore();
+    } else {
+      ctx.save();ctx.strokeStyle='#f0c030';ctx.lineWidth=3;ctx.shadowBlur=8;ctx.shadowColor='#f0c030';
+      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.target.x,p.target.y);ctx.stroke();
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
   });
+
   // Particles
   GS.particles.forEach(p=>{
-    const a=p.life/p.maxLife;
-    ctx.save(); ctx.globalAlpha=a;
-    ctx.font=`bold ${p.size}px 'Kanit',sans-serif`; ctx.textAlign='center';
-    ctx.strokeStyle='rgba(0,0,0,.7)'; ctx.lineWidth=3;
-    ctx.strokeText(p.text,p.x,p.y);
-    ctx.fillStyle='#f0c030'; ctx.fillText(p.text,p.x,p.y);
-    ctx.restore();
+    const a=p.life/p.maxLife;ctx.save();ctx.globalAlpha=a;
+    ctx.font=`bold ${p.size}px 'Kanit',sans-serif`;ctx.textAlign='center';
+    ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=3;ctx.strokeText(p.text,p.x,p.y);
+    ctx.fillStyle='#f0c030';ctx.fillText(p.text,p.x,p.y);ctx.restore();
   });
+
   // Wave banner
   if(GS.spawnTimer<0&&GS.spawnCount===0&&GS.enemies.length===0){
     const pr=Math.min(1,(-GS.spawnTimer)/80);
-    ctx.save(); ctx.globalAlpha=Math.min(1,pr*2);
-    ctx.fillStyle='rgba(0,0,0,.7)'; roundRect(ctx,W/2-150,H/2-30,300,60,16); ctx.fill();
-    ctx.strokeStyle='rgba(240,192,48,.5)'; ctx.lineWidth=2; roundRect(ctx,W/2-150,H/2-30,300,60,16); ctx.stroke();
-    ctx.font=`bold 20px 'Kanit',sans-serif`; ctx.textAlign='center';
-    ctx.fillStyle='#f0c030'; ctx.fillText(`⚔️ คลื่นที่ ${GS.wave+1} บุกมาแล้ว!`,W/2,H/2+7);
-    ctx.restore();
+    ctx.save();ctx.globalAlpha=Math.min(1,pr*2);
+    ctx.fillStyle='rgba(0,0,0,.65)';roundRect(ctx,W/2-150,H/2-28,300,56,14);ctx.fill();
+    ctx.strokeStyle='rgba(240,192,48,.6)';ctx.lineWidth=2;roundRect(ctx,W/2-150,H/2-28,300,56,14);ctx.stroke();
+    ctx.font=`bold 20px 'Kanit',sans-serif`;ctx.textAlign='center';ctx.fillStyle='#f0c030';
+    ctx.fillText(`⚔️ คลื่นที่ ${GS.wave+1} บุกมาแล้ว!`,W/2,H/2+7);ctx.restore();
   }
-}
-
-function drawBg(ctx,W,H){
-  const t=GS.theme;
-  // Trees / rocks background decoration
-  if(t===THEMES.forest){
-    // Clouds
-    drawCloud(ctx,W*.15,H*.1,40); drawCloud(ctx,W*.6,H*.08,55); drawCloud(ctx,W*.85,H*.14,35);
-    // Trees row
-    for(let i=0;i<6;i++){
-      const tx=W*(i*.18+.02), ty=H*.65;
-      drawTree(ctx,tx,ty,28+i*4);
-    }
-  } else if(t===THEMES.castle){
-    // Stars
-    if(!GS._stars){ GS._stars=[]; for(let i=0;i<40;i++) GS._stars.push({x:Math.random()*W,y:Math.random()*H*.6,r:Math.random()*1.5+.5}); }
-    ctx.fillStyle='rgba(255,255,200,.8)';
-    GS._stars.forEach(s=>{ ctx.beginPath();ctx.arc(s.x,s.y,s.r+Math.sin(GS.tick*.03+s.x)*.3,0,Math.PI*2);ctx.fill(); });
-    // Castle silhouette BG
-    drawCastleBg(ctx,W*.05,H*.6,80);
-    drawCastleBg(ctx,W*.8,H*.55,100);
-  } else {
-    // Cave stalactites
-    ctx.fillStyle='rgba(60,30,10,.8)';
-    for(let i=0;i<8;i++){
-      const sx=W*(i*.14+.02), sh=H*(.05+Math.sin(i*1.7)*.06);
-      ctx.beginPath(); ctx.moveTo(sx-12,0); ctx.lineTo(sx+12,0); ctx.lineTo(sx,H*sh+H*.12); ctx.closePath(); ctx.fill();
-    }
-    // Glowing crystals
-    ['#e74c3c','#3498db','#9b59b6','#27ae60'].forEach((cl,i)=>{
-      const cx=W*(i*.25+.1), cy=H*.7+Math.sin(GS.tick*.04+i)*3;
-      ctx.save(); ctx.shadowBlur=12; ctx.shadowColor=cl; ctx.fillStyle=cl;
-      ctx.beginPath(); ctx.moveTo(cx,cy-12); ctx.lineTo(cx+6,cy); ctx.lineTo(cx,cy+6); ctx.lineTo(cx-6,cy); ctx.closePath(); ctx.fill();
-      ctx.restore();
-    });
-  }
-}
-
-function drawCloud(ctx,x,y,r){
-  ctx.save(); ctx.fillStyle='rgba(255,255,255,.75)';
-  [0,r*.6,r*1.1,r*1.7].forEach((dx,i)=>{ const cr=[r,r*.7,r*.8,r*.65][i]; ctx.beginPath(); ctx.arc(x+dx,y,cr,0,Math.PI*2); ctx.fill(); });
-  ctx.restore();
-}
-function drawTree(ctx,x,y,r){
-  ctx.fillStyle='#5d4037'; ctx.fillRect(x-4,y-r,8,r); // trunk
-  const g=THEMES.forest.treeColor;
-  ctx.fillStyle=g;
-  ctx.beginPath(); ctx.moveTo(x,y-r*2.5); ctx.lineTo(x+r,y-r*.8); ctx.lineTo(x-r,y-r*.8); ctx.closePath(); ctx.fill();
-  ctx.fillStyle='#2e7d32';
-  ctx.beginPath(); ctx.moveTo(x,y-r*3.2); ctx.lineTo(x+r*.8,y-r*1.6); ctx.lineTo(x-r*.8,y-r*1.6); ctx.closePath(); ctx.fill();
-}
-function drawCastleBg(ctx,x,y,s){
-  ctx.fillStyle='rgba(40,40,70,.6)';
-  ctx.fillRect(x,y-s,s*.6,s); // main tower
-  ctx.fillRect(x-s*.2,y-s*.7,s*.2,s*.7); // left tower
-  ctx.fillRect(x+s*.6,y-s*.7,s*.2,s*.7); // right tower
-  // Merlons
-  for(let i=0;i<3;i++) ctx.fillRect(x+i*s*.22-s*.05,y-s-10,s*.15,10);
 }
 
 function drawPath(ctx,W,H){
-  const WP=GS.WP, pw=H*.13, t=GS.theme;
-  ctx.lineCap='round'; ctx.lineJoin='round';
-  ctx.strokeStyle=t.pathDark; ctx.lineWidth=pw+8; tracePath(ctx,WP); ctx.stroke();
-  ctx.strokeStyle=t.path; ctx.lineWidth=pw; tracePath(ctx,WP); ctx.stroke();
-  // Dashed centerline for road feel
-  ctx.strokeStyle='rgba(255,255,255,.1)'; ctx.lineWidth=2; ctx.setLineDash([12,12]);
-  tracePath(ctx,WP); ctx.stroke(); ctx.setLineDash([]);
+  const WP=GS.WP,pw=H*.13,t=GS.theme;
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.strokeStyle=t.pathDark;ctx.lineWidth=pw+8;tracePath(ctx,WP);ctx.stroke();
+  ctx.strokeStyle=t.path;ctx.lineWidth=pw;tracePath(ctx,WP);ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=2;ctx.setLineDash([12,12]);tracePath(ctx,WP);ctx.stroke();ctx.setLineDash([]);
 }
-function tracePath(ctx,WP){
-  ctx.beginPath(); ctx.moveTo(WP[0].x,WP[0].y);
-  for(let i=1;i<WP.length;i++) ctx.lineTo(WP[i].x,WP[i].y);
-}
+function tracePath(ctx,WP){ctx.beginPath();ctx.moveTo(WP[0].x,WP[0].y);for(let i=1;i<WP.length;i++)ctx.lineTo(WP[i].x,WP[i].y);}
 
 function drawSlot2Ghost(ctx){
-  if(GS.tower2Active) return;
-  const s=GS.SLOTS[1]; const canBuy=GS.coins>=TOWER_COST;
-  ctx.save(); ctx.globalAlpha=canBuy?.6:.25;
-  ctx.fillStyle=canBuy?'rgba(240,192,48,.25)':'rgba(255,255,255,.08)';
-  ctx.beginPath(); ctx.arc(s.x,s.y+6,26,0,Math.PI*2); ctx.fill();
-  ctx.strokeStyle=canBuy?'#f0c030':'rgba(255,255,255,.3)'; ctx.lineWidth=2;
-  ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
-  drawCastleTower(ctx,s.x,s.y,0.7,canBuy?'rgba(240,192,48,.5)':'rgba(200,200,200,.3)');
-  ctx.font=`bold 12px 'Kanit',sans-serif`; ctx.textAlign='center';
-  ctx.fillStyle=canBuy?'#f0c030':'#888';
-  ctx.fillText(`${TOWER_COST}🪙`,s.x,s.y+28); ctx.restore(); ctx.textAlign='left';
+  if(GS.tower2Active)return;
+  const s=GS.SLOTS[1],canBuy=GS.coins>=TOWER_COST;
+  const img=IMGS.tw_magic;
+  ctx.save();ctx.globalAlpha=canBuy?.55:.25;
+  if(img){ctx.drawImage(img,s.x-30,s.y-60,60,75);}
+  else{ctx.fillStyle=canBuy?'rgba(240,192,48,.3)':'rgba(255,255,255,.1)';ctx.beginPath();ctx.arc(s.x,s.y,24,0,Math.PI*2);ctx.fill();}
+  ctx.font=`bold 12px 'Kanit',sans-serif`;ctx.textAlign='center';
+  ctx.fillStyle=canBuy?'#f0c030':'#aaa';ctx.strokeStyle='rgba(0,0,0,.6)';ctx.lineWidth=2;
+  ctx.strokeText(`${TOWER_COST}🪙`,s.x,s.y+28);ctx.fillText(`${TOWER_COST}🪙`,s.x,s.y+28);
+  ctx.restore();ctx.textAlign='left';
 }
 
 function drawTower(ctx,tw,idx){
-  // Shadow
-  ctx.save(); ctx.fillStyle='rgba(0,0,0,.3)';
-  ctx.beginPath(); ctx.ellipse(tw.x,tw.y+16,24,8,0,0,Math.PI*2); ctx.fill();
-  drawCastleTower(ctx,tw.x,tw.y,1.0,idx===0?'#c8a060':'#8a8aaa');
-  ctx.restore();
+  const key=idx===0?'tw_castle':'tw_magic';
+  const img=IMGS[key];
+  const tw_w=72,tw_h=90;
+  ctx.save();
+  // shadow
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.beginPath();ctx.ellipse(tw.x,tw.y+tw_h*.45,tw_w*.45,tw_w*.15,0,0,Math.PI*2);ctx.fill();
+  if(img){ctx.drawImage(img,tw.x-tw_w/2,tw.y-tw_h*.85,tw_w,tw_h);}
+  else{ctx.font='32px serif';ctx.textAlign='center';ctx.fillText(idx===0?'🏰':'⚔️',tw.x,tw.y);}
+  ctx.restore();ctx.textAlign='left';
 }
 
-function drawCastleTower(ctx,x,y,scale,color){
-  const s=scale;
-  ctx.save(); ctx.translate(x,y); ctx.scale(s,s);
-  // Base platform
-  const pg=ctx.createRadialGradient(0,4,0,0,4,28);
-  pg.addColorStop(0,color); pg.addColorStop(1,'rgba(0,0,0,.4)');
-  ctx.fillStyle=pg; ctx.beginPath(); ctx.arc(0,6,22,0,Math.PI*2); ctx.fill();
-  // Tower body
-  ctx.fillStyle=color; ctx.fillRect(-10,-20,20,26);
-  // Battlements (merlons)
-  [-8,-2,4].forEach(mx=>{ ctx.fillStyle=color; ctx.fillRect(mx,-26,4,8); });
-  // Door
-  ctx.fillStyle='rgba(0,0,0,.5)'; ctx.fillRect(-4,-10,8,10);
-  // Window
-  ctx.fillStyle='rgba(240,192,48,.6)'; ctx.beginPath();
-  ctx.arc(0,-14,3,0,Math.PI*2); ctx.fill();
-  // Flag
-  ctx.fillStyle='#e74c3c';
-  ctx.beginPath(); ctx.moveTo(0,-26); ctx.lineTo(10,-22); ctx.lineTo(0,-18); ctx.closePath(); ctx.fill();
-  ctx.restore();
-}
-
-// ══ NUMBER MONSTER ══
 function drawMonster(ctx,e){
-  if(e.dead) return;
-  const sz=e.type==='boss'?42:e.type==='tank'?32:24;
+  if(e.dead)return;
+  const img=IMGS[e.imgKey];
+  const sz=e.type==='boss'?70:e.type==='tank'?54:42;
   const bob=Math.sin(GS.tick*.14+e.x*.01)*2;
-  const col=e.color;
-  ctx.save(); ctx.translate(e.x,e.y+bob);
-
-  // Shadow
-  ctx.fillStyle='rgba(0,0,0,.25)';
-  ctx.beginPath(); ctx.ellipse(0,sz*.42,sz*.55,sz*.2,0,0,Math.PI*2); ctx.fill();
-
-  // Body — blob shape
-  ctx.fillStyle=col;
-  ctx.shadowBlur=8; ctx.shadowColor=col+'88';
-  ctx.beginPath();
-  ctx.ellipse(0,0,sz*.65,sz*.7,0,0,Math.PI*2); ctx.fill();
-  ctx.shadowBlur=0;
-
-  // Darker shade on top for 3D
-  const shd=ctx.createRadialGradient(-sz*.2,-sz*.3,0,0,0,sz*.7);
-  shd.addColorStop(0,'rgba(255,255,255,.25)'); shd.addColorStop(.6,'rgba(0,0,0,0)'); shd.addColorStop(1,'rgba(0,0,0,.3)');
-  ctx.fillStyle=shd; ctx.beginPath(); ctx.ellipse(0,0,sz*.65,sz*.7,0,0,Math.PI*2); ctx.fill();
-
-  // Eyes — angry (angled inward)
-  const eyeY=-sz*.15, eyeR=sz*.12;
-  const eyePositions=[[-sz*.22,eyeY],[sz*.22,eyeY]];
-  eyePositions.forEach(([ex,ey],i)=>{
-    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(ex,ey,eyeR,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='#222'; ctx.beginPath(); ctx.arc(ex+eyeR*.2*(i===0?1:-1),ey+eyeR*.1,eyeR*.55,0,Math.PI*2); ctx.fill();
-    // Angry brow
-    ctx.strokeStyle='#333'; ctx.lineWidth=sz*.05; ctx.lineCap='round';
-    ctx.beginPath();
-    if(i===0){ ctx.moveTo(ex-eyeR*1.1,ey-eyeR*.9); ctx.lineTo(ex+eyeR*.5,ey-eyeR*.4); }
-    else { ctx.moveTo(ex-eyeR*.5,ey-eyeR*.4); ctx.lineTo(ex+eyeR*1.1,ey-eyeR*.9); }
-    ctx.stroke();
-  });
-
-  // Mouth — frown with teeth for boss
-  ctx.strokeStyle='#333'; ctx.lineWidth=sz*.06;
-  ctx.beginPath(); ctx.arc(0,sz*.15,sz*.25,Math.PI*.1,Math.PI*.9); ctx.stroke();
-  if(e.type==='boss'){
-    ctx.fillStyle='#fff';
-    [-sz*.15,0,sz*.15].forEach(tx=>{
-      ctx.beginPath(); ctx.moveTo(tx,sz*.15); ctx.lineTo(tx-sz*.06,sz*.28); ctx.lineTo(tx+sz*.06,sz*.28); ctx.closePath(); ctx.fill();
-    });
+  ctx.save();
+  // shadow
+  ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.ellipse(e.x,e.y+sz*.45,sz*.42,sz*.14,0,0,Math.PI*2);ctx.fill();
+  if(img){
+    ctx.drawImage(img,e.x-sz/2,e.y-sz+bob,sz,sz);
+  } else {
+    ctx.font=`${sz*.9}px serif`;ctx.textAlign='center';ctx.fillText('👾',e.x,e.y+bob);
   }
-
-  // Number on body
-  ctx.font=`bold ${sz*.55}px 'Kanit',sans-serif`; ctx.textAlign='center';
-  ctx.fillStyle='rgba(0,0,0,.4)'; ctx.fillText(e.num,sz*.04,sz*.1+sz*.18);
-  ctx.fillStyle='#fff'; ctx.fillText(e.num,0,sz*.08+sz*.18);
-
-  // Crown for boss
-  if(e.type==='boss'){
-    ctx.fillStyle='#f0c030';
-    ctx.beginPath(); ctx.moveTo(-sz*.4,-sz*.72); ctx.lineTo(-sz*.4,-sz*.52);
-    ctx.lineTo(-sz*.2,-sz*.62); ctx.lineTo(0,-sz*.45);
-    ctx.lineTo(sz*.2,-sz*.62); ctx.lineTo(sz*.4,-sz*.52);
-    ctx.lineTo(sz*.4,-sz*.72); ctx.closePath(); ctx.fill();
-    ctx.strokeStyle='#c8a215'; ctx.lineWidth=1.5; ctx.stroke();
-  }
-
-  ctx.restore(); ctx.textAlign='left';
-
+  // Number overlay on monster belly
+  const numSz=Math.round(sz*.38);
+  ctx.font=`bold ${numSz}px 'Kanit',sans-serif`;ctx.textAlign='center';
+  const ny=e.y+bob+sz*.12;
+  ctx.strokeStyle='rgba(0,0,0,.7)';ctx.lineWidth=numSz*.2;
+  ctx.strokeText(e.num,e.x,ny);
+  ctx.fillStyle='#fff';ctx.fillText(e.num,e.x,ny);
+  ctx.restore();ctx.textAlign='left';
   // HP bar
-  const bw=e.type==='boss'?60:e.type==='tank'?42:30;
-  const bx=e.x-bw/2, by=e.y-sz*.9;
-  const pct=e.hp/e.maxHp;
-  ctx.fillStyle='rgba(0,0,0,.5)'; ctx.fillRect(bx,by,bw,7);
-  const hg=ctx.createLinearGradient(bx,0,bx+bw,0);
-  hg.addColorStop(0,pct>.5?'#2ecc71':'#e74c3c');
-  hg.addColorStop(1,pct>.5?'#27ae60':'#c0392b');
-  ctx.fillStyle=hg; ctx.fillRect(bx,by,bw*pct,7);
-  ctx.strokeStyle='rgba(0,0,0,.4)'; ctx.lineWidth=1; ctx.strokeRect(bx,by,bw,7);
+  const bw=e.type==='boss'?62:e.type==='tank'?46:32;
+  const by=e.y-sz-4,pct=e.hp/e.maxHp;
+  ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(e.x-bw/2,by,bw,6);
+  const hg=ctx.createLinearGradient(e.x-bw/2,0,e.x+bw/2,0);
+  hg.addColorStop(0,pct>.5?'#2ecc71':'#e74c3c');hg.addColorStop(1,pct>.5?'#27ae60':'#c0392b');
+  ctx.fillStyle=hg;ctx.fillRect(e.x-bw/2,by,bw*pct,6);
+  ctx.strokeStyle='rgba(0,0,0,.4)';ctx.lineWidth=1;ctx.strokeRect(e.x-bw/2,by,bw,6);
 }
 
-function roundRect(ctx,x,y,w,h,r){
-  ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.arcTo(x+w,y,x+w,y+r,r);
-  ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r); ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
-  ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
-}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
 
 // ══════════════════════════════════════════
 // END GAME
 // ══════════════════════════════════════════
 function endGame(won){
-  GS.phase=won?'win':'lose';
-  if(animID){cancelAnimationFrame(animID);animID=null;}
+  GS.phase=won?'win':'lose';if(animID){cancelAnimationFrame(animID);animID=null;}
   if(won){
     const stars=GS.lives>=4?3:GS.lives>=2?2:1;
-    const gd=saveData[curGrade], ch=CHAPTERS[curGrade][curChIdx];
-    gd.stars[ch.id]=Math.max(gd.stars[ch.id]||0,stars);
-    if(curChIdx>=gd.chapter) gd.chapter=curChIdx+1;
-    writeSave(); refreshGradeStars();
-    document.getElementById('res-icon').textContent='🏆';
-    document.getElementById('res-title').textContent='ดับมอนสำเร็จ!';
+    const gd=saveData[curGrade],ch=CHAPTERS[curGrade][curChIdx];
+    gd.stars[ch.id]=Math.max(gd.stars[ch.id]||0,stars);if(curChIdx>=gd.chapter)gd.chapter=curChIdx+1;
+    writeSave();refreshGradeStars();
+    document.getElementById('res-icon').textContent='🏆';document.getElementById('res-title').textContent='ดับมอนสำเร็จ!';
     document.getElementById('res-stars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
     document.getElementById('res-sub').textContent=`เหรียญ ${GS.coins} · หัวใจเหลือ ${GS.lives}/${LIVES_MAX}`;
-    const ni=curChIdx+1, nb=document.getElementById('res-next');
-    if(ni<CHAPTERS[curGrade].length){ nb.style.display=''; nb.textContent=`▶ บทที่ ${ni+1}: ${CHAPTERS[curGrade][ni].name}`; }
-    else nb.style.display='none';
-  } else {
-    document.getElementById('res-icon').textContent='💀';
-    document.getElementById('res-title').textContent='ถูกมอนดับแล้ว!';
-    document.getElementById('res-stars').textContent='';
-    document.getElementById('res-sub').textContent=`ลองใหม่นะ! ได้เหรียญ ${GS.coins}`;
+    const ni=curChIdx+1,nb=document.getElementById('res-next');
+    if(ni<CHAPTERS[curGrade].length){nb.style.display='';nb.textContent=`▶ บทที่ ${ni+1}: ${CHAPTERS[curGrade][ni].name}`;}else nb.style.display='none';
+  }else{
+    document.getElementById('res-icon').textContent='💀';document.getElementById('res-title').textContent='ถูกมอนดับแล้ว!';
+    document.getElementById('res-stars').textContent='';document.getElementById('res-sub').textContent=`ลองใหม่นะ! ได้เหรียญ ${GS.coins}`;
     document.getElementById('res-next').style.display='none';
   }
   setTimeout(()=>goScreen('sc-result'),800);
 }
-function nextChapter(){
-  const ni=curChIdx+1;
-  if(ni<CHAPTERS[curGrade].length) openChapter(ni);
-  else { renderMap(); goScreen('sc-map'); }
-}
+function nextChapter(){const ni=curChIdx+1;if(ni<CHAPTERS[curGrade].length)openChapter(ni);else{renderMap();goScreen('sc-map');}}
 
 // ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
-window.addEventListener('resize',()=>{ if(GS&&GS.phase==='playing') setupCanvas(); });
+window.addEventListener('resize',()=>{if(GS&&GS.phase==='playing')setupCanvas();});
 loadSave();
+// Preload images → show title
+preloadImages(()=>{
+  goScreen('sc-title');
+});
 </script>
 </body>
 </html>

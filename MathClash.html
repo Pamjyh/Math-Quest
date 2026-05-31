@@ -150,6 +150,7 @@ body{font-family:'Kanit',sans-serif;background:#0a0a14;color:#fff;overflow:hidde
       <span class="hud-lives" id="hud-lives">❤️❤️❤️❤️❤️</span>
       <span class="hud-wave" id="hud-wave">⚔️ คลื่น 1/4</span>
       <span class="hud-coins" id="hud-coins">🪙 0</span>
+      <button onclick="quitGame()" style="background:rgba(231,76,60,.18);border:1px solid rgba(231,76,60,.4);color:#e74c3c;padding:4px 10px;border-radius:8px;font-size:.75em;cursor:pointer;font-family:inherit;">✖ ออก</button>
     </div>
     <div class="q-row">
       <div class="q-box"><div class="q-text" id="q-text">เตรียมพร้อม!</div></div>
@@ -437,14 +438,14 @@ function beginWave(){
 function spawnEnemy(){
   const isBoss=GS.wave===GS.ch.waves-1&&GS.spawnCount===GS.spawnMax-1;
   const isHeavy=GS.spawnCount%4===3;
-  // ── FASTER speeds ──
-  const spd=1.1+GS.wave*0.18;
+  // ── Speeds ──
+  const spd=2.2+GS.wave*0.25;
   const hp=isBoss?12+GS.wave*4:isHeavy?4+GS.wave:2+Math.floor(GS.wave*.7);
   const keys=isBoss?BS_KEYS:isHeavy?TK_KEYS:NM_KEYS;
   const imgKey=keys[Math.floor(Math.random()*keys.length)];
   const num=ri(0,9);
   GS.enemies.push({x:GS.WP[0].x,y:GS.WP[0].y,wpIdx:1,hp,maxHp:hp,
-    speed:spd*(isBoss?.50:isHeavy?.70:1),
+    speed:spd*(isBoss?.55:isHeavy?.75:1),
     type:isBoss?'boss':isHeavy?'tank':'normal',imgKey,num,dead:false});
   GS.spawnCount++;
 }
@@ -728,51 +729,38 @@ function drawMonster(ctx,e){
   ctx.strokeStyle='rgba(0,0,0,.4)';ctx.lineWidth=1;ctx.strokeRect(e.x-bw/2,by,bw,6);
 }
 
-function drawProjectile(p){
+function drawProjectile(ctx,p){
   if(p.hit)return;
-  // draw arc trail
-  ctx_trail(p);
-  const pi=IMGS.proj;
-  const ps=20;
-  ctx_tmp(()=>{
-    const cv=document.getElementById('gCanvas');
-    const ctx=cv.getContext('2d');
-    // glow
+  // ── arc trail ──
+  if(p.t>0.04){
     ctx.save();
-    ctx.shadowBlur=12;ctx.shadowColor='#f0c030';
-    if(pi){
-      const angle=Math.atan2(p.ty-p.sy,p.tx-p.sx);
-      ctx.translate(p.x,p.y);ctx.rotate(angle);
-      ctx.drawImage(pi,-ps/2,-ps/2,ps,ps);
-    } else {
-      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle='#f0c030';ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='rgba(240,192,48,0.4)';ctx.lineWidth=2;ctx.lineCap='round';
+    ctx.shadowBlur=6;ctx.shadowColor='rgba(240,192,48,0.6)';
+    ctx.beginPath();
+    const steps=10;
+    for(let i=0;i<=steps;i++){
+      const mt=p.t*(i/steps);const imt=1-mt;
+      const bx=imt*imt*p.sx+2*imt*mt*p.cx+mt*mt*p.tx;
+      const by=imt*imt*p.sy+2*imt*mt*p.cy+mt*mt*p.ty;
+      if(i===0)ctx.moveTo(bx,by);else ctx.lineTo(bx,by);
     }
-    ctx.restore();
-  });
-}
-
-// draw bezier arc trail behind projectile
-function ctx_trail(p){
-  const cv=document.getElementById('gCanvas');
-  const ctx=cv.getContext('2d');
-  if(p.t<0.05)return;
-  ctx.save();
-  ctx.strokeStyle='rgba(240,192,48,0.35)';ctx.lineWidth=2;ctx.lineCap='round';
-  ctx.shadowBlur=6;ctx.shadowColor='rgba(240,192,48,0.5)';
-  ctx.beginPath();
-  // draw bezier arc from start to current pos using a sampled sub-curve
-  const steps=12;
-  for(let i=0;i<=steps;i++){
-    const mt=p.t*(i/steps);const imt=1-mt;
-    const bx=imt*imt*p.sx+2*imt*mt*p.cx+mt*mt*p.tx;
-    const by=imt*imt*p.sy+2*imt*mt*p.cy+mt*mt*p.ty;
-    if(i===0)ctx.moveTo(bx,by);else ctx.lineTo(bx,by);
+    ctx.stroke();ctx.restore();
   }
-  ctx.stroke();ctx.restore();
+  // ── projectile head ──
+  const pi=IMGS.proj;const ps=20;
+  ctx.save();
+  ctx.shadowBlur=14;ctx.shadowColor='#f0c030';
+  if(pi){
+    const angle=Math.atan2(p.ty-p.sy,p.tx-p.sx);
+    ctx.translate(p.x,p.y);ctx.rotate(angle);
+    ctx.drawImage(pi,-ps/2,-ps/2,ps,ps);
+  } else {
+    ctx.translate(p.x,p.y);
+    ctx.fillStyle='#ffe066';ctx.beginPath();ctx.arc(0,0,6,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,3,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
 }
-
-function ctx_tmp(fn){fn();}
 
 function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
 
@@ -799,6 +787,7 @@ function endGame(won){
   setTimeout(()=>goScreen('sc-result'),700);
 }
 function nextChapter(){const ni=curChIdx+1;if(ni<CHAPTERS[curGrade].length)openChapter(ni);else{renderMap();goScreen('sc-map');}}
+function quitGame(){if(animID){cancelAnimationFrame(animID);animID=null;}GS=null;renderMap();goScreen('sc-map');}
 
 // ══════════════════════════════════════════
 // INIT

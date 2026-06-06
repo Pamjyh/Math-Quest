@@ -21,8 +21,14 @@ const BattleScene = (() => {
   let animTick = null;
   let paused = false;
   let comboCount = 0;                           // combo counter
+  let midShown = false;                         // mid-battle cutscene (ต่อ stage)
   let heroPos  = { x: 0, y: 0, w: 0, h: 0 };  // live position for effects
   let enemyPos = { x: 0, y: 0, w: 0, h: 0 };  // live position for effects
+
+  const BG_KEY   = { p1: 'bg_p1', p4: 'bg_p4', p5: 'bg_p5', p6: 'bg_p6' };
+  const BOSS_KEY = { p1: 'boss_p1', p4: 'boss_p4', p5: 'boss_p5', p6: 'boss_p6' };
+  const MID_KEY  = { p1: 'mid_p1',  p4: 'mid_p4',  p5: 'mid_p5',  p6: 'mid_p6' };
+  const WIN_KEY  = { p1: 'victory_p1', p4: 'victory_p4', p5: 'victory_p5', p6: 'victory_p6' };
 
   // ---- เริ่มต่อสู้ ----
   function start(opts) {
@@ -44,6 +50,7 @@ const BattleScene = (() => {
     total      = 0;
     paused     = false;
     comboCount = 0;
+    midShown   = false;
 
     // Init effect layer (stop ก่อนเพื่อป้องกัน double animation loop)
     Effects.stop();
@@ -54,11 +61,10 @@ const BattleScene = (() => {
 
     // Boss stage → cutscene → bossEntrance → battle
     if (enemy.isBoss) {
-      const storyKeys = { p1: 'bossP1', p4: 'bossP4', p5: 'bossP5', p6: 'bossP6' };
-      Cutscene.show(storyKeys[mode] || 'bossP1', () => {
+      Cutscene.show(BOSS_KEY[mode] || 'boss_p1', () => {
         updateHUD();
         Effects.bossEntrance(enemy, () => nextQuestion());
-      });
+      }, BG_KEY[mode]);
     } else {
       updateHUD();
       nextQuestion();
@@ -151,12 +157,8 @@ const BattleScene = (() => {
   }
 
   function _getWorldKey() {
-    const save = Progress.get();
-    const modesDone = Object.values(save.modes).filter(m => m.stagesCleared >= CONFIG.stagesPerMode).length;
-    if (modesDone >= 4) return 'bg_castle';
-    if (modesDone >= 3) return 'bg_snow';
-    if (modesDone >= 2) return 'bg_volcano';
-    return null;
+    // ใช้ background ตาม mode ปัจจุบัน (bg_p1–p6)
+    return BG_KEY[mode] || null;
   }
 
   // ---- โจทย์ ----
@@ -311,14 +313,13 @@ const BattleScene = (() => {
 
       // ด่านสุดท้ายของ mode → victory cutscene ก่อนแสดงผล
       const isLastStage = stage >= CONFIG.stagesPerMode - 1;
-      const victoryKeys = { p1: 'victoryP1', p4: 'victoryP4', p5: 'victoryP5', p6: 'victoryP6' };
       const delay = isLastStage ? 2600 : 600;
 
       setTimeout(() => {
-        if (isLastStage && victoryKeys[mode]) {
-          Cutscene.show(victoryKeys[mode], () => {
+        if (isLastStage && WIN_KEY[mode]) {
+          Cutscene.show(WIN_KEY[mode], () => {
             Game.showResult({ win: true, stars, score, accuracy, correct, total, gained });
-          });
+          }, BG_KEY[mode]);
         } else {
           Game.showResult({ win: true, stars, score, accuracy, correct, total, gained });
         }
@@ -332,7 +333,18 @@ const BattleScene = (() => {
         Game.showResult({ win: false, stars: 0, score, accuracy, correct, total, gained: 0 });
       }, 600);
     } else {
-      setTimeout(nextQuestion, 400);
+      // Mid-battle cutscene: เมื่อ HP ศัตรู < 50% บนด่าน Boss ครั้งแรก
+      if (!midShown && enemy.isBoss && enemyHP < enemyMaxHP * 0.5) {
+        midShown = true;
+        const midKey = MID_KEY[mode];
+        if (midKey && typeof STORY !== 'undefined' && STORY[midKey]) {
+          Cutscene.show(midKey, () => nextQuestion(), BG_KEY[mode]);
+        } else {
+          setTimeout(nextQuestion, 400);
+        }
+      } else {
+        setTimeout(nextQuestion, 400);
+      }
     }
   }
 

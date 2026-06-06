@@ -7,7 +7,11 @@ const Game = (() => {
   let currentMode = null;
   let currentHero = null;
   let currentStage = 0;
-  const _introShown = {};   // reset ทุก page load → intro แสดงครั้งแรกของแต่ละ mode
+  let _universeIntroShown = false;  // แสดงครั้งเดียวต่อ session
+  const _introShown = {};           // reset ทุก page load → intro ต่อ mode
+
+  const _BG_KEY   = { p1: 'bg_p1', p4: 'bg_p4', p5: 'bg_p5', p6: 'bg_p6' };
+  const _MODE_INTRO = { p1: 'intro_p1', p4: 'intro_p4', p5: 'intro_p5', p6: 'intro_p6' };
 
   // ---- Init ----
   function init() {
@@ -97,14 +101,23 @@ const Game = (() => {
   function startBattle() {
     showScreen('screen-battle');
     requestAnimationFrame(() => {
-      // แสดง intro cutscene ครั้งแรกของแต่ละ mode (reset ทุก page load)
-      if (currentStage === 0 && !_introShown[currentMode]) {
+      const bgKey    = _BG_KEY[currentMode];
+      const modeKey  = _MODE_INTRO[currentMode];
+      const launch   = () => BattleScene.start({ mode: currentMode, hero: currentHero, stage: currentStage });
+
+      if (!_universeIntroShown) {
+        // ครั้งแรกสุดของ session → universe intro → mode intro → battle
+        _universeIntroShown = true;
         _introShown[currentMode] = true;
-        Cutscene.show('intro', () => {
-          BattleScene.start({ mode: currentMode, hero: currentHero, stage: currentStage });
+        Cutscene.show('universe_intro', () => {
+          Cutscene.show(modeKey, launch, bgKey);
         });
+      } else if (currentStage === 0 && !_introShown[currentMode]) {
+        // mode ใหม่ที่ยังไม่เคยเห็น intro
+        _introShown[currentMode] = true;
+        Cutscene.show(modeKey, launch, bgKey);
       } else {
-        BattleScene.start({ mode: currentMode, hero: currentHero, stage: currentStage });
+        launch();
       }
     });
   }

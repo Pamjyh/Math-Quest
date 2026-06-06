@@ -8,6 +8,7 @@ const Sprites = (() => {
   const cache = {};  // { key: OffscreenCanvas หรือ HTMLCanvasElement }
 
   const FILES = {
+    // ── Battle sprites (Pic/) ─────────────────────────────
     warrior:      'warrior.png',
     angel:        'angel.png',
     dragon:       'dragon.png',
@@ -27,10 +28,33 @@ const Sprites = (() => {
     bg_volcano:   'bg_volcano.png',
     bg_snow:      'bg_snow.png',
     bg_castle:    'bg_castle.png',
+
+    // ── Cutscene portraits (หน้าตัดฉาก/) ─────────────────
+    hero_warrior:    'หน้าตัดฉาก/hero_warrior.png',
+    hero_angel:      'หน้าตัดฉาก/hero_angel.png',
+    hero_giant:      'หน้าตัดฉาก/hero_giant.png',
+    hero_dragon:     'หน้าตัดฉาก/hero_dragon.png',
+    hero_fairy:      'หน้าตัดฉาก/hero_fairy.png',
+    hero_indra:      'หน้าตัดฉาก/hero_indra.png',
+    hero_vaisravana: 'หน้าตัดฉาก/hero_vaisravana.png',
+    hero_ultimate:   'หน้าตัดฉาก/hero_ultimate.png',
+    boss_m1:         'หน้าตัดฉาก/boss_m1.png',
+    boss_m4:         'หน้าตัดฉาก/boss_m4.png',
+    boss_m5:         'หน้าตัดฉาก/boss_m5.png',
+    villain_chaoz:   'หน้าตัดฉาก/villain_chaoz.png',
+
+    // ── Mode backgrounds (พื้นหลัง/) ─────────────────────
+    bg_p1: 'พื้นหลัง/BG1.png',
+    bg_p4: 'พื้นหลัง/BG2.png',
+    bg_p5: 'พื้นหลัง/BG3.png',
+    bg_p6: 'พื้นหลัง/BG4.png',
   };
 
-  // ไฟล์ที่ไม่ต้อง remove bg (landscapes)
-  const NO_REMOVE_BG = new Set(['bg_volcano', 'bg_snow', 'bg_castle']);
+  // ไฟล์ที่ไม่ต้อง remove bg (landscapes + backgrounds)
+  const NO_REMOVE_BG = new Set([
+    'bg_volcano', 'bg_snow', 'bg_castle',
+    'bg_p1', 'bg_p4', 'bg_p5', 'bg_p6',
+  ]);
 
   const total = Object.keys(FILES).length;
   let loaded = 0;
@@ -119,7 +143,8 @@ const Sprites = (() => {
           console.warn(`[Sprites] ไม่พบ: ${file}`);
           if (loaded >= total) resolve();
         };
-        img.src = BASE + file;
+        // ถ้า file มี '/' แล้วให้ใช้ path ตรงๆ ไม่ต้อง prepend BASE
+        img.src = file.includes('/') ? file : BASE + file;
       });
     });
   }

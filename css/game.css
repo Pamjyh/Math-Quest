@@ -288,3 +288,32 @@
   justify-content: center;
 }
 .btn-icon:hover { background: rgba(44,82,130,0.85); }
+
+/* ── Cutscene v2 — portrait sides ─────────────────────── */
+.cs-portrait.cs-right {
+  right: 60px; left: auto;
+  animation: portraitIn .4s ease-out;
+}
+.cs-portrait.cs-left {
+  left: 60px; right: auto;
+  animation: portraitInLeft .4s ease-out;
+}
+@keyframes portraitInLeft {
+  0%   { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Cutscene v2 — screen effects ──────────────────────── */
+@keyframes csShake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-10px); }
+  40%     { transform: translateX(10px); }
+  60%     { transform: translateX(-6px); }
+  80%     { transform: translateX(6px); }
+}
+@keyframes csFlash {
+  0%,100% { filter: brightness(1); }
+  40%     { filter: brightness(2.8); }
+}
+.cs-shake { animation: csShake .45s ease-out; }
+.cs-flash { animation: csFlash .35s ease-out; }

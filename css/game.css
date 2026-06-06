@@ -1,0 +1,290 @@
+/* game.css — Battle screen v2 (ปรับ layout ให้ choice ขึ้นครบ 4) */
+
+/* ---- Float numbers keyframe ---- */
+@keyframes floatUp {
+  0%   { opacity:1; transform: translateY(0) scale(1); }
+  60%  { opacity:1; transform: translateY(-28px) scale(1.1); }
+  100% { opacity:0; transform: translateY(-50px) scale(0.9); }
+}
+
+/* ---- Canvas wrap (battle + effect overlay) ---- */
+.canvas-wrap {
+  position: relative;
+  width: 100%; flex-shrink: 0;
+  height: 44vh; min-height: 160px; max-height: 480px;
+}
+.canvas-wrap canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block; image-rendering: pixelated;
+}
+#effect-canvas { pointer-events: none; z-index: 2; }
+#float-layer   { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
+
+/* ---- Full-screen effect overlay ---- */
+#fs-effect {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column;
+  background: rgba(0,0,0,0.85);
+  opacity: 0; transition: opacity 0.3s;
+}
+.fs-boss-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(180,0,0,.3) 0%, transparent 70%); }
+.fs-boss-content { position: relative; z-index: 2; text-align: center; }
+.fs-boss-icon { font-size: 72px; animation: bossZoom .6s ease-out; }
+.fs-boss-name { font-size: 2rem; font-weight: 700; color: #e74c3c; margin-top: 12px; text-shadow: 0 0 20px rgba(231,76,60,.8); animation: bossZoom .8s ease-out; }
+.fs-boss-bar  { width: 200px; height: 3px; background: #e74c3c; margin: 12px auto 0; animation: bossBar 1.8s ease-out; box-shadow: 0 0 10px #e74c3c; }
+@keyframes bossZoom { 0%{transform:scale(0.3);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+@keyframes bossBar  { 0%{width:0} 100%{width:200px} }
+
+/* ---- Cutscene ---- */
+.cutscene-screen {
+  flex-direction: column; background: #000;
+  opacity: 0; transition: opacity 0.4s; z-index: 90;
+}
+.cutscene-screen.active { opacity: 1; }
+.cs-letterbox {
+  flex-shrink: 0; height: 60px; background: #000; width: 100%;
+}
+.cs-main {
+  flex: 1; width: 100%; position: relative;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.cs-bg-layer {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg,#0a0a1e,#0d1530);
+  background-size: cover; background-position: center;
+  transition: background 0.5s;
+}
+.cs-portrait {
+  position: absolute; right: 60px; bottom: 0;
+  width: 180px; height: 180px;
+  background-size: contain; background-repeat: no-repeat;
+  background-position: bottom center;
+  filter: drop-shadow(0 0 20px rgba(241,196,15,.4));
+  animation: portraitIn .4s ease-out;
+}
+@keyframes portraitIn { 0%{transform:translateX(40px);opacity:0} 100%{transform:translateX(0);opacity:1} }
+.cs-dialog-box {
+  position: relative; z-index: 2;
+  background: rgba(10,8,30,.92);
+  border-top: 2px solid rgba(241,196,15,.35);
+  padding: 14px 20px 16px; width: 100%;
+}
+.cs-speaker {
+  font-size: 12px; font-weight: 600; color: #f1c40f;
+  margin-bottom: 6px; letter-spacing: .5px;
+}
+.cs-text {
+  font-size: 15px; color: #ecf0f1; line-height: 1.65;
+  min-height: 52px;
+}
+.cs-cursor {
+  display: inline-block; width: 9px; height: 15px;
+  background: #f1c40f; margin-left: 2px;
+  animation: blink .7s infinite; vertical-align: middle;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cs-next-btn {
+  position: absolute; right: 16px; bottom: 14px;
+  background: rgba(241,196,15,.15); border: 1px solid rgba(241,196,15,.5);
+  color: #f1c40f; padding: 5px 14px; border-radius: 8px;
+  font-family: 'Sarabun',sans-serif; font-size: 13px;
+  cursor: pointer; transition: background .15s;
+}
+.cs-next-btn:hover { background: rgba(241,196,15,.3); }
+.cs-skip-btn {
+  position: absolute; left: 16px; bottom: 14px;
+  background: transparent; border: none;
+  color: var(--text-dim,#666); font-size: 12px; cursor: pointer;
+  font-family: 'Sarabun',sans-serif;
+}
+.cs-dots {
+  position: absolute; bottom: 56px; right: 20px;
+  display: flex; gap: 5px;
+}
+.cs-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.25); }
+.cs-dot.active { background: #f1c40f; }
+
+/* ---- Battle layout ---- */
+#screen-battle {
+  flex-direction: column;
+  background: var(--bg);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ---- HUD ---- */
+.battle-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #0f1e3a;
+  border-bottom: 2px solid #1e3a5f;
+  width: 100%;
+  flex-shrink: 0;
+  gap: 10px;
+  z-index: 5;
+}
+.hud-hero, .hud-enemy {
+  flex: 1;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hud-enemy { align-items: flex-end; }
+
+.hud-hero span, .hud-enemy span { color: #ecf0f1; font-weight: 600; }
+.hud-info {
+  text-align: center;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  min-width: 80px;
+  line-height: 1.6;
+}
+.hp-bar {
+  width: 100%;
+  height: 10px;
+  background: #1e3a5f;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #2c5282;
+}
+.hp-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+.hp-fill.hero  { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+.hp-fill.enemy { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+#hero-hp-text, #enemy-hp-text {
+  font-size: 0.7rem;
+  color: #95a5a6;
+}
+
+/* ---- Canvas — fixed height, ไม่ใช้ flex:1 ---- */
+#battle-canvas {
+  width: 100%;
+  height: 44vh;
+  min-height: 160px;
+  max-height: 480px;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  flex-shrink: 0;
+}
+
+/* ---- Question panel — compact, ให้ choice ขึ้นครบ ---- */
+.question-panel {
+  background: #0f1e3a;
+  border-top: 2px solid #1e3a5f;
+  padding: 8px 12px 12px;
+  width: 100%;
+  flex: 1;               /* กิน space ที่เหลือ */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+}
+#timer-bar {
+  width: 100%;
+  height: 5px;
+  background: #1e3a5f;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+#timer-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--green);
+  border-radius: 3px;
+  transition: width 1s linear, background 0.5s;
+}
+.question-text {
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  flex-shrink: 0;
+  margin: 4px 0;
+}
+.choices-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+.choice-btn {
+  background: #162444;
+  border: 2px solid #2c5282;
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Sarabun', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  /* ใช้ min-height แทน padding เพื่อให้ยืดหยุ่น */
+  min-height: 44px;
+  padding: 8px 4px;
+}
+.choice-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(241,196,15,0.12);
+  transform: scale(1.03);
+}
+.choice-btn:active:not(:disabled) { transform: scale(0.97); }
+.choice-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---- Battle feedback overlay ---- */
+.battle-feedback {
+  position: fixed;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  font-size: 1.5rem;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.2s;
+  z-index: 20;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  white-space: nowrap;
+}
+.battle-feedback.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.battle-feedback.correct { color: #2ecc71; }
+.battle-feedback.wrong   { color: #e74c3c; }
+.battle-feedback.timeout { color: #95a5a6; }
+
+/* ---- Control buttons ---- */
+.battle-controls {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 30;
+}
+.btn-icon {
+  background: rgba(15,30,58,0.85);
+  border: 1px solid #2c5282;
+  color: var(--text);
+  font-size: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon:hover { background: rgba(44,82,130,0.85); }

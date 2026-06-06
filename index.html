@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <title>Math Quest: คณิตวีรบุรุษ</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+  <!-- ====== SCREEN: LOADING ====== -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading-box">
+      <div class="pixel-logo">⚔️</div>
+      <h1>Math Quest</h1>
+      <p>คณิตวีรบุรุษ</p>
+      <div class="loading-bar"><div id="loading-fill"></div></div>
+      <p id="loading-text" class="loading-hint">กำลังโหลด...</p>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: MENU ====== -->
+  <div id="screen-menu" class="screen">
+    <canvas id="menu-bg-canvas"></canvas>
+    <div class="menu-overlay">
+      <div class="title-block">
+        <div class="title-icon">⚔️</div>
+        <h1 class="game-title">Math Quest</h1>
+        <p class="game-subtitle">คณิตวีรบุรุษ</p>
+      </div>
+      <div class="menu-buttons">
+        <button class="btn btn-primary" onclick="Game.showModeSelect()">🎮 เล่นเกม</button>
+        <button class="btn btn-secondary" onclick="Game.showCollection()">🏆 Collection</button>
+        <button class="btn btn-secondary" onclick="Game.showLeaderboard()">🏆 Leaderboard</button>
+        <button class="btn btn-ghost" onclick="Game.showAbout()">ℹ️ เกี่ยวกับเกม</button>
+      </div>
+      <div class="menu-mode-badge" id="classroom-badge" style="display:none">
+        🏫 โหมดห้องเรียน
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: NAME ENTRY ====== -->
+  <div id="screen-name" class="screen">
+    <div class="modal-card">
+      <div class="name-hero-icon">🎮</div>
+      <h2>ใส่ชื่อของคุณ</h2>
+      <p class="name-hint">ชื่อจะแสดงใน Leaderboard ของห้องเรียน</p>
+      <input type="text" id="player-name-input" class="name-input"
+             placeholder="ชื่อนักเรียน..." maxlength="12"
+             onkeydown="if(event.key==='Enter') Game.confirmName()" />
+      <button class="btn btn-primary" onclick="Game.confirmName()">▶ เริ่มเลย!</button>
+      <button class="btn btn-ghost" onclick="Game.showMenu()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: MODE SELECT ====== -->
+  <div id="screen-mode" class="screen">
+    <div class="modal-card wide">
+      <h2>เลือกโหมดเรียน</h2>
+      <div class="mode-grid">
+        <button class="mode-card" onclick="Game.selectMode('p1')">
+          <div class="mode-icon">🌱</div>
+          <div class="mode-name">Starter</div>
+          <div class="mode-desc">ชั้น ป.1<br/>บวก · ลบ 1–20</div>
+        </button>
+        <button class="mode-card" onclick="Game.selectMode('p4')">
+          <div class="mode-icon">⚔️</div>
+          <div class="mode-name">Explorer</div>
+          <div class="mode-desc">ชั้น ป.4<br/>สูตรคูณ 1–12</div>
+        </button>
+        <button class="mode-card" onclick="Game.selectMode('p5')">
+          <div class="mode-icon">🔥</div>
+          <div class="mode-name">Challenger</div>
+          <div class="mode-desc">ชั้น ป.5<br/>สูตรคูณ + หาร</div>
+        </button>
+        <button class="mode-card" onclick="Game.selectMode('p6')">
+          <div class="mode-icon">💎</div>
+          <div class="mode-name">Master</div>
+          <div class="mode-desc">ชั้น ป.6<br/>โจทย์ผสมรวม</div>
+        </button>
+      </div>
+      <button class="btn btn-ghost mt-2" onclick="Game.showMenu()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: HERO SELECT ====== -->
+  <div id="screen-hero" class="screen">
+    <div class="modal-card wide">
+      <h2>เลือกนักรบของคุณ</h2>
+      <div id="hero-grid" class="hero-grid">
+        <!-- filled by hero.js -->
+      </div>
+      <button class="btn btn-ghost mt-2" onclick="Game.showModeSelect()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: BATTLE ====== -->
+  <div id="screen-battle" class="screen">
+    <!-- HUD top -->
+    <div class="battle-hud">
+      <div class="hud-hero">
+        <span id="hud-hero-name">นักรบ</span>
+        <div class="hp-bar"><div id="hero-hp-fill" class="hp-fill hero"></div></div>
+        <span id="hero-hp-text">100/100</span>
+      </div>
+      <div class="hud-info">
+        <div id="hud-stage">ด่าน 1</div>
+        <div id="hud-score">⭐ 0</div>
+      </div>
+      <div class="hud-enemy">
+        <span id="hud-enemy-name">ศัตรู</span>
+        <div class="hp-bar"><div id="enemy-hp-fill" class="hp-fill enemy"></div></div>
+        <span id="enemy-hp-text">80/80</span>
+      </div>
+    </div>
+
+    <!-- Battle Canvas + Effect Overlay -->
+    <div class="canvas-wrap">
+      <canvas id="battle-canvas"></canvas>
+      <canvas id="effect-canvas"></canvas>
+      <div id="float-layer"></div>
+    </div>
+
+    <!-- Question Panel -->
+    <div id="question-panel" class="question-panel">
+      <div id="timer-bar"><div id="timer-fill"></div></div>
+      <div id="question-text" class="question-text">? × ? = ?</div>
+      <div id="choices-grid" class="choices-grid">
+        <!-- filled by battle.js -->
+      </div>
+    </div>
+
+    <!-- Combo / Feedback overlay -->
+    <div id="battle-feedback" class="battle-feedback"></div>
+
+    <!-- Full-screen cinematic overlay (boss entrance etc.) -->
+    <div id="fs-effect"></div>
+
+    <!-- Control buttons: pause + quit -->
+    <div class="battle-controls">
+      <button class="btn-icon" onclick="Game.pauseBattle()" title="หยุดชั่วคราว">⏸</button>
+      <button class="btn-icon" onclick="Game.quitBattle()" title="ออกจากด่าน">🏠</button>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: CUTSCENE ====== -->
+  <div id="screen-cutscene" class="screen cutscene-screen" style="display:none">
+    <div class="cs-letterbox top"></div>
+    <div class="cs-main">
+      <div class="cs-bg-layer"></div>
+      <div class="cs-portrait"></div>
+      <div class="cs-dialog-box">
+        <div class="cs-speaker"></div>
+        <div class="cs-text"></div>
+        <button class="cs-next-btn" onclick="Cutscene.next()">► ต่อไป</button>
+        <button class="cs-skip-btn" onclick="Cutscene.skip()">ข้าม</button>
+      </div>
+      <div class="cs-dots"></div>
+    </div>
+    <div class="cs-letterbox bottom"></div>
+  </div>
+
+  <!-- ====== SCREEN: RESULT ====== -->
+  <div id="screen-result" class="screen">
+    <div class="modal-card">
+      <div id="result-stars" class="result-stars"></div>
+      <h2 id="result-title">ชนะแล้ว!</h2>
+      <div id="result-stats" class="result-stats"></div>
+      <div class="result-buttons">
+        <button class="btn btn-primary" onclick="Game.retryStage()">🔄 เล่นอีกครั้ง</button>
+        <button class="btn btn-secondary" onclick="Game.nextStage()">▶ ด่านต่อไป</button>
+        <button class="btn btn-ghost" onclick="Game.showMenu()">🏠 เมนูหลัก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: COLLECTION ====== -->
+  <div id="screen-collection" class="screen">
+    <div class="modal-card wide">
+      <h2>🏆 Collection ของคุณ</h2>
+      <div id="collection-grid" class="hero-grid"></div>
+      <p id="collection-progress" class="collection-progress"></p>
+      <button class="btn btn-ghost mt-2" onclick="Game.showMenu()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: LEADERBOARD ====== -->
+  <div id="screen-leaderboard" class="screen">
+    <div class="modal-card wide">
+      <h2>🏆 Leaderboard ห้องเรียน</h2>
+      <div class="lb-tabs">
+        <button class="lb-tab active" onclick="Game.showLBTab('p1')">🌱 ป.1</button>
+        <button class="lb-tab" onclick="Game.showLBTab('p4')">⚔️ ป.4</button>
+        <button class="lb-tab" onclick="Game.showLBTab('p5')">🔥 ป.5</button>
+        <button class="lb-tab" onclick="Game.showLBTab('p6')">💎 ป.6</button>
+      </div>
+      <div id="lb-content" class="lb-content"></div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+        <button class="btn btn-ghost" onclick="Game.showMenu()">← กลับ</button>
+        <button class="btn btn-ghost" style="color:var(--red)" onclick="Game.resetSession()">🗑 เริ่มใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SCREEN: ABOUT ====== -->
+  <div id="screen-about" class="screen">
+    <div class="modal-card">
+      <h2>ℹ️ เกี่ยวกับเกม</h2>
+      <div class="about-content">
+        <p><strong>Math Quest: คณิตวีรบุรุษ</strong></p>
+        <p>สื่อเทคโนโลยีดิจิทัลเพื่อการเรียนรู้คณิตศาสตร์<br/>ระดับประถมศึกษา ป.1, ป.4, ป.5, ป.6</p>
+        <p>📚 กลุ่มสาระคณิตศาสตร์<br/>🎓 สร้างโดย ครูภาม</p>
+        <p>เวอร์ชัน 1.0 | ปีการศึกษา 2569</p>
+        <hr/>
+        <p class="small">เผยแพร่ผ่าน OBEC Content Center<br/>สามารถเล่นได้ทั้ง Online และ Offline</p>
+      </div>
+      <button class="btn btn-ghost mt-2" onclick="Game.showMenu()">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ====== JS Modules (load order matters) ====== -->
+  <script src="js/config.js"></script>
+  <script src="js/data/sprites.js"></script>
+  <script src="js/data/questions.js"></script>
+  <script src="js/data/heroes.js"></script>
+  <script src="js/data/enemies.js"></script>
+  <script src="js/systems/effects.js"></script>
+  <script src="js/systems/progress.js"></script>
+  <script src="js/systems/session.js"></script>
+  <script src="js/systems/audio.js"></script>
+  <script src="js/systems/math.js"></script>
+  <script src="js/entities/hero.js"></script>
+  <script src="js/entities/enemy.js"></script>
+  <script src="js/scenes/menu.js"></script>
+  <script src="js/scenes/cutscene.js"></script>
+  <script src="js/scenes/battle.js"></script>
+  <script src="js/scenes/result.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

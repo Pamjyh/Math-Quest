@@ -8,26 +8,32 @@ const Sprites = (() => {
   const cache = {};  // { key: OffscreenCanvas หรือ HTMLCanvasElement }
 
   const FILES = {
-    // ── Battle sprites (Pic/) ─────────────────────────────
-    warrior:      'warrior.png',
-    angel:        'angel.png',
-    dragon:       'dragon.png',
-    fairy:        'fairy.png',
-    giant:        'giant.png',
-    indra:        'indra.png',
-    kubera:       'kubera.png',
-    legend:       'legend.png',
-    slime:        'slime.png',
-    boss_slime:   'boss_slime.png',
-    goblin:       'goblin.png',
-    boss_general: 'boss_general.png',
-    dark_knight:  'dark_knight.png',
-    boss_demon:   'boss_demon.png',
-    shadow:       'shadow.png',
-    boss_grand:   'boss_grand.png',
-    bg_volcano:   'bg_volcano.png',
-    bg_snow:      'bg_snow.png',
-    bg_castle:    'bg_castle.png',
+    // ── Hero battle sprites (ตัวละคร/) ───────────────────
+    warrior: 'ตัวละคร/hero_warrior.png',
+    angel:   'ตัวละคร/hero_angel.png',
+    giant:   'ตัวละคร/hero_giant.png',
+    dragon:  'ตัวละคร/hero_dragon.png',
+    fairy:   'ตัวละคร/hero_fairy.png',
+    indra:   'ตัวละคร/hero_indra.png',
+    kubera:  'ตัวละคร/hero_vaisravana.png',  // ท้าวเวสสุวรรณ
+    legend:  'ตัวละคร/hero_ultimate.png',    // สุดยอดวีรบุรุษ
+
+    // ── Boss battle sprites (ตัวละคร/) ───────────────────
+    boss_slime:   'ตัวละคร/boss_m1.png',     // มิสเตอร์โกลาหล (mode 1)
+    boss_general: 'ตัวละคร/boss_m4.png',     // นายพลคูณบิด    (mode 4)
+    boss_demon:   'ตัวละคร/boss_m5.png',     // ปู่เวทย์ลืมเลข (mode 5)
+    boss_grand:   'ตัวละคร/villain_chaoz.png', // ท้าวอลวน      (mode 6)
+
+    // ── Regular enemy sprites (Pic/ — ยังไม่มีเวอร์ชันใหม่) ──
+    slime:      'slime.png',
+    goblin:     'goblin.png',
+    dark_knight:'dark_knight.png',
+    shadow:     'shadow.png',
+
+    // ── Old backgrounds (Pic/ — keep for compat) ─────────
+    bg_volcano: 'bg_volcano.png',
+    bg_snow:    'bg_snow.png',
+    bg_castle:  'bg_castle.png',
 
     // ── Cutscene portraits (หน้าตัดฉาก/) ─────────────────
     hero_warrior:    'หน้าตัดฉาก/hero_warrior.png',

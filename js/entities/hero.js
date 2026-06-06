@@ -6,21 +6,23 @@
 const HeroEntity = (() => {
 
   // วาด Hero sprite บน canvas
+  // hero อยู่ซ้าย → flipX=true (หันขวาหาศัตรู), moveRight=true (โจมตีไปขวา)
   function draw(ctx, hero, x, y, w, h, state = 'idle', frame = 0) {
     const img = Sprites.get(hero.id);
-    _drawSprite(ctx, img, x, y, w, h, state, frame, false);
+    _drawSprite(ctx, img, x, y, w, h, state, frame, true, true);
   }
 
   // วาด Enemy sprite บน canvas (mirror flip)
+  // enemy อยู่ขวา → flipX=true (หันซ้ายหา hero), moveRight=false (โจมตีไปซ้าย)
   function drawEnemy(ctx, enemy, x, y, w, h, state = 'idle', frame = 0) {
     const img = Sprites.get(enemy.spriteId || enemy.id);
-    _drawSprite(ctx, img, x, y, w, h, state, frame, true);
+    _drawSprite(ctx, img, x, y, w, h, state, frame, true, false);
   }
 
   // ---- core draw ----
-  function _drawSprite(ctx, img, x, y, w, h, state, frame, flipX) {
-    // รองรับทั้ง HTMLImageElement และ HTMLCanvasElement (จาก removeBg)
-    // img.complete ไม่มีใน Canvas → ใช้ width/naturalWidth แทน
+  // flipX    : กลับด้านรูปภาพ (true = mirror)
+  // moveRight: ทิศทางเคลื่อนเมื่อ attack (true = ขวา, false = ซ้าย)
+  function _drawSprite(ctx, img, x, y, w, h, state, frame, flipX, moveRight) {
     if (!img || !(img.naturalWidth || img.width)) return;
 
     ctx.save();
@@ -28,23 +30,19 @@ const HeroEntity = (() => {
     // Hurt: กระพริบแดง
     if (state === 'hurt') {
       if (Math.floor(frame / 3) % 2 === 0) {
-        // วาดปกติ
         _blit(ctx, img, x, y, w, h, flipX);
-        // ซ้อน tint แดง
         ctx.globalCompositeOperation = 'source-atop';
         ctx.globalAlpha = 0.45;
         ctx.fillStyle = '#e74c3c';
         ctx.fillRect(x, y, w, h);
       }
-      // frame คี่ = ไม่วาด (กระพริบ)
       ctx.restore();
       return;
     }
 
-    // Attack: ขยับเข้าหา
+    // Attack: ขยับเข้าหาศัตรู (ทิศทางตามตำแหน่ง ไม่ขึ้นกับ flip)
     if (state === 'attack') {
-      const shift = flipX ? -w * 0.12 : w * 0.12;
-      x += shift;
+      x += moveRight ? w * 0.12 : -w * 0.12;
     }
 
     // Idle: bob เบาๆ

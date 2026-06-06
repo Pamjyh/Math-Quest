@@ -99,18 +99,29 @@ const BattleScene = (() => {
     animTick = null;
   }
 
+  // ---- Background: cover scaling (เต็ม canvas ไม่ยืด) ----
+  function _drawBgCover(ctx, img, W, H) {
+    const iW = img.naturalWidth || img.width;
+    const iH = img.naturalHeight || img.height;
+    if (!iW || !iH) { ctx.drawImage(img, 0, 0, W, H); return; }
+    const scale = Math.max(W / iW, H / iH);
+    const dW = iW * scale;
+    const dH = iH * scale;
+    ctx.drawImage(img, (W - dW) / 2, (H - dH) / 2, dW, dH);
+  }
+
   // ---- วาด Canvas ----
   function renderCanvas() {
     if (!ctx) return;
     const W = canvas.width, H = canvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    // Background
+    // Background — ใช้ cover scaling ให้เต็ม canvas โดยไม่ยืด
     const worldKey = _getWorldKey();
     const bgImg = Sprites.get(worldKey);
-    if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
-      ctx.drawImage(bgImg, 0, 0, W, H);
-      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    if (bgImg && (bgImg.naturalWidth || bgImg.width)) {
+      _drawBgCover(ctx, bgImg, W, H);
+      ctx.fillStyle = 'rgba(0,0,0,0.22)';
       ctx.fillRect(0, H * 0.72, W, H * 0.28);
     } else {
       const sky = ctx.createLinearGradient(0, 0, 0, H);

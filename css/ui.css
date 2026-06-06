@@ -144,7 +144,7 @@
 .about-content .small { font-size: 0.8rem; color: var(--text-dim); }
 
 /* ---- Menu ---- */
-#screen-menu { position: relative; }
+/* ลบ position:relative ที่ override position:fixed จาก .screen */
 #menu-bg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .menu-overlay {
   position: relative; z-index: 2;

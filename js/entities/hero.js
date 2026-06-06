@@ -19,7 +19,9 @@ const HeroEntity = (() => {
 
   // ---- core draw ----
   function _drawSprite(ctx, img, x, y, w, h, state, frame, flipX) {
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    // รองรับทั้ง HTMLImageElement และ HTMLCanvasElement (จาก removeBg)
+    // img.complete ไม่มีใน Canvas → ใช้ width/naturalWidth แทน
+    if (!img || !(img.naturalWidth || img.width)) return;
 
     ctx.save();
 

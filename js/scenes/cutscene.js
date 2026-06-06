@@ -15,6 +15,7 @@ const Cutscene = (() => {
   let onDoneCallback = null;
   let isTyping = false;
   let _currentBgKey = null;
+  let _hideTimer = null;   // ← ป้องกัน race condition เมื่อ chain 2 cutscene ติดกัน
 
   // ---- Init ----
   function init() {
@@ -36,6 +37,8 @@ const Cutscene = (() => {
   // ---- Show custom slide array ----
   function showSlides(slideArr, onDone) {
     if (!el) { if (onDone) onDone(); return; }
+    // ยกเลิก setTimeout ที่อาจค้างจาก cutscene ก่อนหน้า (ป้องกัน race condition)
+    if (_hideTimer) { clearTimeout(_hideTimer); _hideTimer = null; }
     slides = slideArr;
     currentIdx = 0;
     onDoneCallback = onDone || null;
@@ -198,9 +201,12 @@ const Cutscene = (() => {
   function _close() {
     if (!el) return;
     el.classList.remove('active', 'cs-shake', 'cs-flash');
-    setTimeout(() => {
+    // ใช้ tracked timer เพื่อให้ยกเลิกได้ถ้ามี cutscene ใหม่ตามมาทันที
+    if (_hideTimer) clearTimeout(_hideTimer);
+    _hideTimer = setTimeout(() => {
       el.style.display = 'none';
       slides = [];
+      _hideTimer = null;
     }, 500);
     if (onDoneCallback) { onDoneCallback(); onDoneCallback = null; }
   }

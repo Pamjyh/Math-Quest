@@ -89,14 +89,19 @@ const Sprites = (() => {
     for (let i = 0; i < d.length; i += 4) {
       const r = d[i], g = d[i+1], b = d[i+2];
 
-      // กรอบดำ (dark background เช่น warrior)
+      // กรอบดำ
       const isDark = r < 30 && g < 30 && b < 30;
 
-      // พื้นขาว / checkered (slime, เส้นตาราง ~192 หรือ 255)
-      const isWhite = r > 210 && g > 210 && b > 210;
+      // พื้นขาว
+      const isWhite = r > 215 && g > 215 && b > 215;
 
-      // checkered gray ของ Photoshop/Leonardo transparent pattern
-      const isCheckered = Math.abs(r - 192) < 25 && Math.abs(g - 192) < 25 && Math.abs(b - 192) < 25;
+      // checkered pattern ทุกโทน (Photoshop / Canva / Leonardo)
+      // จับ pixel ที่เป็น "neutral gray" (R≈G≈B) ระหว่าง 90–215
+      // ครอบคลุมทั้ง light squares (~192) และ dark squares (~128-144)
+      const maxCh = Math.max(r, g, b);
+      const minCh = Math.min(r, g, b);
+      const isCheckered = maxCh - minCh < 28   // colorless (R≈G≈B)
+                       && r > 90 && r < 215;   // mid-range brightness
 
       if (isDark || isWhite || isCheckered) {
         d[i + 3] = 0;  // alpha = 0 → transparent
